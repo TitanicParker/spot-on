@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0d14">
+<title>100 Arguments</title>
+<style>
+:root {
+  --bg: #0a0d14;
+  --card: #121722;
+  --card2: #171d2a;
+  --text: #f7f9fd;
+  --muted: #9aa5b7;
+  --accent: #90b7ff;
+  --accent2: #c9d9ff;
+  --yellow: #ffd95c;
+  --red: #ff7a7a;
+  --line: rgba(255,255,255,.08);
+  --shadow: 0 26px 80px rgba(0,0,0,.48);
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(76,110,180,.18), transparent 34%),
+    radial-gradient(circle at 90% 12%, rgba(115,75,170,.12), transparent 30%),
+    var(--bg);
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+button { font: inherit; }
+.app {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding:
+    calc(10px + var(--safe-top))
+    12px
+    calc(10px + var(--safe-bottom))
+    12px;
+}
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 40px;
+}
+.brand {
+  color: rgba(255,255,255,.52);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding-left: 6px;
+}
+.actions {
+  display: flex;
+  gap: 7px;
+}
+.icon-btn {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: rgba(255,255,255,.035);
+  color: var(--muted);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+}
+.icon-btn:active { transform: scale(.96); }
+.stage {
+  position: relative;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  perspective: 1300px;
+}
+.card-wrap {
+  width: min(760px, 100%);
+  height: min(86vh, 920px);
+  position: relative;
+  touch-action: pan-y;
+}
+.card {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.015)),
+    var(--card);
+  box-shadow: var(--shadow);
+  will-change: transform, opacity, background;
+  transition: transform .28s cubic-bezier(.2,.75,.15,1), opacity .22s ease, background .4s ease;
+}
+.card.dragging { transition: none; }
+.card.enter-right { transform: translateX(8%) rotateY(-3deg); opacity: 0; }
+.card.enter-left { transform: translateX(-8%) rotateY(3deg); opacity: 0; }
+
+.visible {
+  min-height: 0;
+  padding: clamp(20px, 4vw, 34px);
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: clamp(12px, 2.4vh, 18px);
+}
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.point {
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .035em;
+}
+.counter {
+  color: rgba(255,255,255,.42);
+  font-size: 12px;
+  font-weight: 700;
+}
+.title {
+  margin: 0;
+  font-size: clamp(18px, 2.6vw, 28px);
+  line-height: 1.12;
+  letter-spacing: -.025em;
+  font-weight: 760;
+  max-width: 95%;
+}
+.body-wrap {
+  min-height: 0;
+  display: grid;
+  align-items: center;
+}
+.body {
+  margin: 0;
+  display: grid;
+  gap: 14px;
+}
+.body-intro, .body-rest, .body-full {
+  margin: 0;
+  letter-spacing: -.012em;
+}
+.body-intro {
+  font-size: clamp(18px, 2.55vw, 28px);
+  line-height: 1.32;
+  color: var(--yellow);
+  font-weight: 700;
+  text-shadow: 0 0 0 rgba(0,0,0,0);
+}
+.body-rest {
+  font-size: clamp(18px, 2.42vw, 27px);
+  line-height: 1.36;
+  color: var(--red);
+  font-weight: 560;
+}
+.body-full {
+  font-size: clamp(18px, 2.48vw, 27px);
+  line-height: 1.36;
+  color: var(--text);
+}
+.drawer {
+  border-top: 1px solid var(--line);
+  background: var(--card2);
+}
+details { width: 100%; }
+summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 12px 18px;
+  text-align: center;
+  color: rgba(255,255,255,.46);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .03em;
+}
+summary::-webkit-details-marker { display:none; }
+.clin {
+  padding: 0 18px 16px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--accent2);
+  text-align: center;
+  word-break: break-word;
+}
+.bottombar {
+  padding: 10px 4px 0;
+  display: grid;
+  gap: 8px;
+}
+.progress {
+  width: 100%;
+  height: 3px;
+  border-radius: 99px;
+  background: rgba(255,255,255,.08);
+  overflow: hidden;
+}
+.progress > div {
+  height: 100%;
+  width: 1%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent), #c8b7ff);
+  transition: width .22s ease;
+}
+.hint {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  color: rgba(255,255,255,.32);
+  font-size: 11px;
+  letter-spacing: .03em;
+}
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(74px + var(--safe-bottom));
+  transform: translateX(-50%) translateY(12px);
+  background: rgba(15,19,28,.92);
+  border: 1px solid var(--line);
+  color: var(--text);
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: .2s ease;
+  backdrop-filter: blur(14px);
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.focus .topbar,
+.focus .bottombar {
+  opacity: 0;
+  pointer-events: none;
+}
+.focus .app {
+  grid-template-rows: 0 1fr 0;
+  padding: var(--safe-top) 8px var(--safe-bottom);
+}
+.focus .card-wrap {
+  height: calc(100vh - var(--safe-top) - var(--safe-bottom) - 12px);
+}
+.focus .card {
+  border-radius: 22px;
+}
+@media (max-width: 680px) {
+  .app {
+    padding:
+      calc(8px + var(--safe-top))
+      8px
+      calc(8px + var(--safe-bottom))
+      8px;
+  }
+  .card-wrap { height: min(88vh, 920px); }
+  .visible { padding: 20px 18px 18px; }
+  .title {
+    font-size: clamp(17px, 5.3vw, 22px);
+    max-width: 100%;
+  }
+  .body-intro {
+    font-size: clamp(18px, 5.15vw, 24px);
+    line-height: 1.3;
+  }
+  .body-rest, .body-full {
+    font-size: clamp(17px, 4.9vw, 23px);
+    line-height: 1.34;
+  }
+}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <header class="topbar">
+    <div class="brand">100 Arguments</div>
+    <div class="actions">
+      <button class="icon-btn" id="focusBtn" aria-label="Focus mode" title="Focus mode">⛶</button>
+      <button class="icon-btn" id="shareBtn" aria-label="Share" title="Share">↗</button>
+    </div>
+  </header>
+
+  <main class="stage">
+    <div class="card-wrap" id="cardWrap">
+      <article class="card" id="card">
+        <section class="visible">
+          <div class="meta">
+            <div class="point" id="point"></div>
+            <div class="counter" id="counter"></div>
+          </div>
+          <h1 class="title" id="title"></h1>
+          <div class="body-wrap">
+            <div class="body" id="body"></div>
+          </div>
+        </section>
+        <section class="drawer">
+          <details id="details">
+            <summary>Evidence references</summary>
+            <div class="clin" id="clin"></div>
+          </details>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="bottombar">
+    <div class="progress"><div id="progressFill"></div></div>
+    <div class="hint"><span>Swipe</span><span>Tap edges</span><span>← →</span></div>
+  </footer>
+</div>
+
+<div class="toast" id="toast">Copied</div>
+
+<script>
+const points = [{"num": 0, "title": "Read this first", "body": "This case begins with one integrated problem: painful feet, abnormal gait, increased tone, stiffness, movement difficulty and functional decline entered Neurology together. During admission, genuine Parkinsonism was identified, but Neurology also recorded a lower-limb “dystonic posture - NOT FOOT DROP” alongside real structural foot disease. The central allegation is not that every foot symptom was neurological, nor that neuropathy was impossible. It is that the unresolved relationship between the painful feet and the neurological lower-limb disorder was converted into a durable separate/peripheral explanation after the patient says he directly protested that the feet had not been properly dealt with. That Protest does not appear in the authoritative account, while the separate/neuropathy construction does. The resulting information state then travelled through years of care. Later treatment effects, OFF/dystonia evidence and PRKN biology repeatedly crossed the original partition without necessarily reconstructing it. Read the cards as one continuous allegation about clinical uncertainty becoming documentary settlement.", "clin": []}, {"num": 1, "title": "The case begins before Parkinson’s became the organising label", "body": "The central allegation starts with the clinical object that entered hospital, not with the categories later imposed upon it. Primary care was confronting painful abnormal feet, abnormal gait, pathological tone, movement-initiation difficulty, toe clawing, deteriorating dexterity and failing function. The GP explicitly joined gait, feet and muscle tension inside one neurological question. That matters because the later record can only justify separating those elements by showing the work that earned separation. It cannot quietly import its own finished architecture backward and pretend the patient arrived already divided into Parkinsonism, Podiatry and neuropathy. That distinction belongs inside the central allegation itself.", "clin": ["CLIN-000018", "CLIN-000064", "CLIN-000100", "CLIN-000190", "CLIN-000210", "CLIN-000847"]}, {"num": 2, "title": "The GP referral is the jurisdictional starting point", "body": "The GP referral fixes what Neurology accepted responsibility to investigate. It was not a request to confirm Parkinson’s disease while somebody else handled an unrelated foot complaint. It described an unusual deteriorating gait, increased tone, initiation difficulty, stiffness, possible cogwheeling, clawing toes, loss of dexterity and disabling functional decline, with Parkinsonism only one possibility among others. The central allegation therefore has a simple jurisdictional anchor: Neurology received an open feet–gait–tone problem. The force of the point lies in its place within the single alleged mechanism, where omission, partition, inheritance and later validation operate together. That belongs inside the central allegation.", "clin": ["CLIN-000847"]}, {"num": 3, "title": "Podiatry existed before the Neurology partition", "body": "The existence of Podiatry before discharge does not rescue the later separation; it sharpens the question. Structural foot disease was real, visible and already being practically managed. That meant Neurology did not need to invent a podiatric destination. What it still had to determine was whether structural pathology was independent of, influenced by, or interacting with the neurological disorder producing abnormal gait and tone. A pre-existing Podiatry pathway proves structural need, not neurological independence. The central allegation therefore does not attack Podiatry. That is why this point must remain inside the single alleged mechanism rather than become a separate complaint.", "clin": ["CLIN-000899", "CLIN-002874", "CLIN-003004", "CLIN-000847"]}, {"num": 4, "title": "Alcohol initially entered as attempted muscle relaxation", "body": "Before the specialist synthesis, alcohol did not enter the story as an established explanation for painful feet. The GP recorded that the patient had been drinking most nights to help relax muscles. That chronology matters. A behaviour initially described as attempted self-management of abnormal bodily tension later became available as possible etiological support for a peripheral-neuropathy route. The fact of alcohol exposure may be entirely genuine; the allegation concerns its causal reuse. A pre-existing fact is not a pre-existing causal architecture. That is why this point belongs inside the central allegation, not beside it. That belongs inside the central allegation.", "clin": ["CLIN-000064", "CLIN-000100", "CLIN-000190", "CLIN-000210", "CLIN-001142"]}, {"num": 5, "title": "Functional deterioration made the integrated problem urgent", "body": "By late June 2017 the case was not a leisurely diagnostic puzzle. The patient was struggling to gown and ungown, losing dexterity, unable to perform work reliably and at risk of losing employment. The GP observed definite increased tone and abnormal gait and escalated urgently. This matters to the central allegation because clinical urgency strengthens the importance of preserving the true unresolved object. A record that later decomposes the presentation into administratively manageable compartments may look orderly, but the incoming reality was convergent deterioration across movement, gait, feet and function. That distinction directly strengthens the central allegation being advanced here.", "clin": ["CLIN-000064", "CLIN-000100", "CLIN-000190", "CLIN-000210", "CLIN-000847"]}, {"num": 6, "title": "The feet were not background history", "body": "The painful feet were not decorative history appended to a movement-disorder presentation. They had existed for years, required repeated treatment, affected walking, contained visible deformity and were part of the reason the patient sought help. The later record itself acknowledges that corns, calluses, fallen arches and pain had long mattered. The central allegation depends on restoring their correct evidential status: they were an originating signal, not a side issue discovered after Parkinsonism. Once that is recognised, the ethical question changes. Neurology was not merely deciding whether to mention feet. That distinction belongs inside the central allegation itself. That matters ethically.", "clin": ["CLIN-000018", "CLIN-000899", "CLIN-002874", "CLIN-003004", "CLIN-000965"]}, {"num": 7, "title": "The pre-specialist record defeats retrospective simplification", "body": "Any account beginning with “Parkinson’s plus a separate foot problem” starts too late. That formulation is already an output of the specialist architecture under challenge. The pre-specialist evidence instead shows a patient whose feet, gait, tone, movement and function were clinically entangled. This temporal discipline is not neutral housekeeping; it is central to the allegation. If the final record is allowed to redefine the input, the construction disappears because its result is mistaken for its starting point. The ethical analysis must therefore protect the original topology from retrospective contamination. That distinction belongs inside the central allegation itself. That matters ethically.", "clin": ["CLIN-000018", "CLIN-000064", "CLIN-000100", "CLIN-000190", "CLIN-000210", "CLIN-000847", "CLIN-000965"]}, {"num": 8, "title": "The opening accusation is about transformation, not diagnosis", "body": "The first ten points converge on one accusation: the ethically significant act is the transformation of an integrated clinical object into a portable divided information state. Whether Parkinsonism was correctly recognised is not the opening dispute. Whether structural foot disease was real is not the opening dispute. The dispute is what happened to the relationship among those truths. Primary care handed Neurology a body whose feet, gait and tone required explanation together. The later record distributed those elements into destinations with different owners and different evidential futures. That is why this point belongs inside the central allegation, not beside it.", "clin": ["CLIN-000018", "CLIN-000064", "CLIN-000100", "CLIN-000190", "CLIN-000210", "CLIN-000847", "CLIN-001142"]}, {"num": 9, "title": "Neurology itself supplied the strongest integrative neurological sign", "body": "The central allegation does not depend on the patient retrospectively diagnosing dystonia. Neurology itself recorded that the gait was strikingly abnormal and that the footdrop-like appearance was suggestive of dystonic posture, expressly adding “NOT FOOT DROP.” That is an observed specialist sign inside the founding admission. It matters because the later architecture gave this neurological phenomenon diagnostic value while failing to give the painful-foot relationship equivalent developmental attention. The patient need not know what dystonia meant. The service did. That is why this point must remain inside the single alleged mechanism rather than become a separate complaint. That matters ethically.", "clin": ["CLIN-001085"]}, {"num": 10, "title": "The dystonic sign was productive when it served diagnosis", "body": "The lower-limb abnormality was not clinically ignored in every respect. It was useful to the Parkinsonian diagnostic project: the gait was characterised, filmed, incorporated into specialist reasoning and accompanied by extensive examination of rigidity, bradykinesia and other Parkinsonian features. That selective productivity matters. The allegation is not simple neglect but asymmetric deployment of sophistication. A sign could matter enough to support neurological diagnosis yet fail to generate an equivalent inquiry into whether painful loading, toe posture, recurrent lesions and gait belonged partly to the same movement disorder. That is why this point belongs inside the central allegation, not beside it.", "clin": ["CLIN-001085", "CLIN-001128", "CLIN-001142"]}, {"num": 11, "title": "PRKN was already inside the 2017 specialist imagination", "body": "The later PRKN result cannot be projected backward as knowledge, but PRKN/PARK2 was not alien to the 2017 record. It was already specifically considered because of very young onset, symmetry, akinetic-rigid features and family-history context. That contemporaneous possibility matters to the central allegation because it makes lower-limb phenomenology diagnostically relevant within the very framework Neurology was building. The service did not need 2026 genetics to know that this was an unusual monogenic-Parkinsonism question. The force of the point lies in its place within the single alleged mechanism, where omission, partition, inheritance and later validation operate together. That matters clinically too.", "clin": ["CLIN-001520", "CLIN-001742"]}, {"num": 12, "title": "The documented foot examination was small beside the synthesis", "body": "The surviving record contains pes planus, hammertoes, oedema and dystonic-looking gait, but it does not identify a comparably detailed movement-disorders mapping of painful sites, dynamic toe posture, gait phase, loading, provocation or the relationship between the painful foot and the observed dystonic limb. The central allegation uses that asymmetry relentlessly. The final synthesis became highly elaborate about genetics, Parkinsonism and possible neuropathy while the documented relational study of the feet remained modest. This does not prove no examination occurred. That is why this point must remain inside the single alleged mechanism rather than become a separate complaint. That matters ethically.", "clin": ["CLIN-001085", "CLIN-001142", "CLIN-001520", "CLIN-001742"]}, {"num": 13, "title": "Phenomenological distinction was not causal independence", "body": "The patient distinguished foot pain from leg tension. That distinction is clinically useful but logically limited. Two sensations can feel different and still arise from interacting mechanisms, common pathology, altered loading or different manifestations of one movement disorder. The central allegation therefore treats any conversion of “these feel different” into “these are medically separate” as a major epistemic move requiring justification. The phrase cluster later strengthens separation, but the historical substrate does not. The patient supplied phenomenology; the specialist supplied causal architecture. Ethically, those must not be blurred. That distinction directly strengthens the central allegation being advanced here. That matters.", "clin": ["CLIN-000965", "CLIN-001142"]}, {"num": 14, "title": "The case turns on the missing join", "body": "A useful compression from the analytical reservoir is brutally simple: Podiatry knew where it was; Neurology knew the lower-limb state was neurological; the record does not show the join. That sentence captures the central allegation better than a debate over whether neuropathy was reasonable. Multiple specialties could each hold true fragments while nobody rebuilt the whole. The ethical danger arises precisely because modular truth can coexist with system-level error. Local accuracy does not guarantee relational accuracy. The patient’s body remained one integrated system even when records became departmental modules. That distinction belongs inside the central allegation itself. That matters ethically.", "clin": ["CLIN-000899", "CLIN-002874", "CLIN-003004", "CLIN-001085", "CLIN-001914"]}, {"num": 15, "title": "Neurology had enough information to know there was a relationship question", "body": "By the time the admission matured, Neurology had the GP’s integrated referral, marked tone abnormalities, severe young-onset Parkinsonism, a striking gait, a dystonic-looking lower limb, painful structural feet and an open genetic differential. It did not need a later molecular diagnosis to know that the relationship between feet and movement deserved explicit thought. The central allegation is therefore not a demand for clairvoyance. It is a demand for ordinary coherence using information already present. The crucial ethical question becomes whether the service clinically resolved, deliberately preserved, or merely redistributed that relationship. That point strengthens the central allegation itself. That matters.", "clin": ["CLIN-000064", "CLIN-000100", "CLIN-000190", "CLIN-000210", "CLIN-000847", "CLIN-001085", "CLIN-001520", "CLIN-001742"]}, {"num": 16, "title": "The Protest is an objection to completion", "body": "The Protest must be argued in its true form. It was not a sophisticated claim about PRKN, dystonia or neuropathy. It was the patient saying, in substance, that the thing he had come in with—his disabling feet—had not been dealt with and that discharge therefore felt incomplete. That simplicity increases its force. The patient did not need to understand specialist mechanisms to identify unfinished work. The central allegation treats the Protest as a direct challenge to closure, not as retrospective diagnostic insight. That is why this point must remain inside the single alleged mechanism rather than become a separate complaint.", "clin": ["CLIN-004613"]}, {"num": 17, "title": "The full-NCT analogy attacked sufficiency, not diagnosis", "body": "The patient’s later account of asking whether the hospital would give him the “full NCT” and send him out on “bald tires” is rhetorically vivid because its logic is exact. He was not denying that extensive neurological work had occurred. He was saying that extensive work elsewhere did not make the unresolved load-bearing feet safe to ignore. That distinction sits at the heart of the central allegation. A service can be diagnostically industrious and still fail at the relationship that brought the patient in. That is why this point belongs inside the central allegation, not beside it. That matters ethically.", "clin": ["CLIN-004613"]}, {"num": 18, "title": "Fetching the consultant matters as notice", "body": "According to the patient’s account, he asked a trainee to fetch the supervising neurologist because the foot problem remained unresolved. If established, that turns dissatisfaction into direct professional notice. The central allegation does not require proving the patient’s diagnosis; it requires showing the service knew its patient believed the core presenting issue remained unfinished before closure. Notice changes the ethical character of what follows. After notice, the final record cannot be assessed only as an innocent snapshot of uncertainty. The institution must explain whether it reopened, examined, reasoned, documented disagreement or deliberately proceeded. That point strengthens the central allegation itself.", "clin": ["CLIN-004613"]}, {"num": 19, "title": "The Protest returned Neurology to the GP’s original problem", "body": "The Protest did not create a new diagnostic controversy. It returned the specialist service to the same unresolved object the GP had sent: feet, gait and abnormal movement. That circularity is central. The patient’s simple objection and the GP’s professional referral point in the same direction from opposite ends of the admission. Primary care asked Neurology to make sense of an integrated problem; the patient allegedly said before discharge that the integrated problem remained unfinished. The force of the point lies in its place within the single alleged mechanism, where omission, partition, inheritance and later validation operate together. That matters.", "clin": ["CLIN-000064", "CLIN-000100", "CLIN-000190", "CLIN-000210", "CLIN-000847", "CLIN-004613"]}, {"num": 20, "title": "The Protest created a genuine decision fork", "body": "If the Protest occurred, the service had choices. It could re-examine, seek movement-disorders input, articulate a neurological question for Podiatry, retain ownership, document unresolved uncertainty, delay closure, arrange defined review, or proceed while recording why. The central allegation does not insist that only one option was permissible. It insists that there was a fork. That matters because the later record can make the chosen pathway appear inevitable when it was actually selected after challenge. Ethical scrutiny begins where alternatives existed. That is why this evidence must explain the single alleged mechanism, not be broken away into a safer subsidiary theory.", "clin": ["CLIN-004613"]}, {"num": 21, "title": "The record does not visibly show neurological reopening after notice", "body": "The surviving record does not visibly show a post-Protest neurological operation that maps the painful feet back against the dystonic-looking lower limb. That documentary negative must be stated carefully: absence from the record does not prove nothing occurred. But the central allegation concerns precisely what the authoritative record made portable. If the service did reopen the relationship, the clinical and documentary basis should be discoverable. If it did not, the omission becomes more consequential. The force of the point lies in its place within the single alleged mechanism, where omission, partition, inheritance and later validation operate together. That matters ethically.", "clin": ["CLIN-001142", "CLIN-001263", "CLIN-001621", "CLIN-004613", "CLIN-004967"]}, {"num": 22, "title": "The omission removed the warning label", "body": "The Protest’s deepest significance is informational. Had it travelled into the final specialist account, every later reader would know that the adequacy of the foot investigation had been directly disputed before discharge. Without it, later readers inherit “Not clear” without knowing whether that uncertainty followed adequate relational inquiry or reflected unfinished work the patient had just identified. The central allegation therefore characterises the omission as removal of an epistemic warning label. It changes the apparent quality of uncertainty. That is why this evidence must explain the single alleged mechanism, not be broken away into a safer subsidiary theory. That matters.", "clin": ["CLIN-001142", "CLIN-004613"]}, {"num": 23, "title": "Persistence could later be made to look like revision", "body": "Once the Protest disappears from the durable record, the chronology of the patient’s concern changes. Later questioning can look like a new rejection of an established diagnosis rather than persistence of an old unresolved objection. That transformation is ethically serious because it changes how credibility and cooperation are interpreted downstream. The central allegation says the record did not merely lose an episode; it altered the apparent history of dissent. A concern raised before closure can later appear to have emerged after years of treatment. That is why this point belongs inside the central allegation, not beside it. That matters ethically.", "clin": ["CLIN-004613"]}, {"num": 24, "title": "The omission and the construction belong to one mechanism", "body": "The omission must not be separated from the later semantic construction as though one were a documentation complaint and the other a diagnostic complaint. The central allegation is that they work together. Omission removes the fact that closure was challenged; the completed synthesis then supplies a medically coherent route by which the painful feet can sit outside the central Parkinsonian model. One act subtracts destabilising context; the other adds stabilising architecture. The allegation is strongest when treated as one information-state transformation. Without the Protest, the construction travels unopposed. That distinction directly strengthens the central allegation being advanced here. That matters.", "clin": ["CLIN-001142", "CLIN-004613"]}, {"num": 25, "title": "The document remained open after the bedside encounter", "body": "The discharge product was composite and continued to absorb later material after physical discharge, including diagnostic developments. That matters because the Protest, if it occurred, happened before the authoritative specialist product had finished becoming what later readers would receive. The central allegation therefore focuses on the documentary completion window: pre-Protest clinical substrate, Protest and notice, still-open record, final synthesis. Paragraph order cannot establish drafting order, but the document’s openness makes provenance decisive. The institution cannot answer a construction allegation merely by pointing to where words sit in the finished text. That distinction directly strengthens the central allegation being advanced here.", "clin": ["CLIN-001263", "CLIN-001621", "CLIN-004613"]}, {"num": 26, "title": "The authorship chronology is now an ethical issue", "body": "Clinical chronology and document-authorship chronology are different. A final summary can place early history beside later interpretation and post-discharge results, creating the illusion of a single contemporaneous thought process. The central allegation demands reconstruction of when “leg pain,” “burning,” “markedly divorced,” alcohol-related neuropathy reasoning, “Not clear as this has improved” and PARK9 “the neuropathy question” first existed. That is not clerical curiosity. If consequential language pre-dated the Protest from identifiable sources, the construction allegation narrows. If it appeared or materially changed after notice and solved the exact closure problem raised, the ethical suspicion intensifies. That belongs inside the central allegation.", "clin": ["CLIN-001142", "CLIN-001520", "CLIN-001742", "CLIN-001263", "CLIN-001621", "CLIN-004613"]}, {"num": 27, "title": "The phrase cluster is too compact to atomise", "body": "The July microconstruction should be read as a single rhetorical and clinical unit because the decisive terms sit contiguously in the surviving record. “Burning,” “completely separate,” “perhaps a secondary peripheral neuropathy,” alcohol, “Not clear as this has improved,” and “markedly divorced” occur in an exceptionally compressed passage. The central allegation does not require any individual phrase to be false. Its claim is about cumulative function. Atomising each phrase into an independently plausible sentence misses how the cluster redistributes explanatory force. That is why this evidence must explain the single alleged mechanism, not be broken away into a safer subsidiary theory.", "clin": ["CLIN-001142"]}, {"num": 28, "title": "The first recorded burning descriptor matters", "body": "“Burning” is powerful precisely because it is clinically ordinary. It is a familiar neuropathy-compatible descriptor, and its first identified appearance in the disclosed July corpus is inside Neurology’s interpretive passage rather than the recorded patient history. The patient says he did not use it. The central allegation does not claim that clinicians may never introduce interpretive language. It asks what evidential status the finished record gives that language. If clinician-generated vocabulary later reads like patient-origin phenomenology, the record acquires provenance distortion. Once “burning” sits beside separation, neuropathy and alcohol, it does causal work. That point strengthens the central allegation itself.", "clin": ["CLIN-001142"]}, {"num": 29, "title": "Completely separate creates a maximal partition", "body": "The words “completely separate” are not a diagnosis, but they create the widest possible explanatory distance between the painful feet and the neurological movement disorder. That possibility immediately matters because it offers a clean route to closure: Parkinsonism can be central while the feet travel elsewhere. The central allegation does not say the phrase proves the clinician believed absolute separation. It says the phrase places full separation into the authoritative field of possibilities without showing the relational work that earned such breadth. That is why this point must remain inside the single alleged mechanism rather than become a separate complaint.", "clin": ["CLIN-001142"]}, {"num": 30, "title": "Perhaps protects neuropathy from the burden of proof", "body": "The qualifier “perhaps” is not weakness in the alleged mechanism; it is part of its durability. A definitive neuropathy diagnosis would have to withstand confirmation and falsification. A “perhaps” neuropathy can influence management, referrals and interpretation while remaining protected from the consequences of uncertainty. The central allegation therefore treats qualification as functional. The hypothesis can be strong enough to redirect explanation yet soft enough to survive failed testing. This is why later defences that neuropathy was never definitive do not answer the deeper charge. The problem is not excessive certainty. That distinction directly strengthens the central allegation being advanced here.", "clin": ["CLIN-001142"]}, {"num": 31, "title": "Neuropathy supplies an authorised bucket", "body": "“Neuropathy” supplies a recognised medical object capable of travelling through records, prescriptions, referrals and later patient vocabulary. Once named, the unresolved painful-foot territory has somewhere to go. This is the bucket at the centre of the user’s allegation: one component of a movement-disorder phenotype can be carried for years inside a medically respectable category that never becomes firmly established. The central allegation does not depend on neuropathy being absurd. It depends on explanatory solidity exceeding independent evidential solidity. A named bucket can govern attention before it becomes a settled diagnosis. That distinction directly strengthens the central allegation being advanced here.", "clin": ["CLIN-001142", "CLIN-002777", "CLIN-003239"]}, {"num": 32, "title": "Not clear as this has improved makes uncertainty non-obstructive", "body": "“Not clear as this has improved” is one of the most consequential phrases in the case because it can preserve formal uncertainty while reducing practical urgency. The relationship is unresolved, but improvement makes the unresolved state easier to close around. The central allegation treats this as an interface between unfinished diagnosis and completed management. Uncertainty remains visible in prose while no longer obstructing discharge, pathway allocation or later reliance. That is exactly how a record can appear cautious and still exercise strong governing force. The ethical question is not whether “Not clear” was honest. That belongs inside the central allegation.", "clin": ["CLIN-001142"]}, {"num": 33, "title": "Markedly divorced recruits the patient into the partition", "body": "“Markedly divorced” is particularly serious because it attributes strong separation to the patient’s own mind. The historical material supports that he experienced foot pain and leg tension as different sensations. It does not automatically support a claim that he understood them as causally independent neurological problems. The central allegation therefore asks whether specialist language intensified a modest phenomenological distinction into something that made separation appear partly patient-authored. That matters downstream because patient agreement is powerful. A future reader may infer that the patient himself had already disentangled the feet from the movement disorder. That point strengthens the central allegation itself.", "clin": ["CLIN-000965", "CLIN-001142"]}, {"num": 34, "title": "PARK9 gives the neuropathy object a future", "body": "Later in the same synthesis, PARK9 appears as “the neuropathy question.” That phrase does not prove the painful feet generated the PARK9 parenthetical, but it shows neuropathy surviving at a higher analytical level of the document. The central allegation treats this as conceptual continuity: the local peripheral possibility acquires a named future inside sophisticated monogenic reasoning. Meanwhile, the observed dystonic-looking lower limb receives no equivalent developed “feet–dystonia question.” The asymmetry is stark. An unproved peripheral possibility gains semantic, causal and genetic infrastructure; an observed movement phenomenon remains comparatively underdeveloped relationally. That distinction directly strengthens the central allegation being advanced here.", "clin": ["CLIN-001520", "CLIN-001742"]}, {"num": 35, "title": "The final synthesis redistributed uncertainty rather than resolving it", "body": "Taken together, the cluster does not prove neuropathy. It does something more operationally powerful: it redistributes uncertainty. Parkinsonism becomes the central neurological truth; structural disease gets Podiatry; painful sensory phenomena gain a peripheral-neuropathy possibility; alcohol gives plausibility; improvement reduces urgency; patient language appears to support separation; PARK9 preserves the neuropathy question. The central allegation is that this redistribution allowed closure without relational resolution. It converted one difficult integrated question into several manageable smaller objects. Each object could then be handled competently while the join disappeared. That is why this point belongs inside the central allegation, not beside it. That matters.", "clin": ["CLIN-001142", "CLIN-001520", "CLIN-001742"]}, {"num": 36, "title": "Portable apparent knowledge begins with the specialist summary", "body": "A discharge summary is not merely a historical narrative. It is an instrument for future care. Once transmitted, its categories tell later clinicians what has already been considered, what remains open and who owns each problem. The central allegation therefore treats the 2017 synthesis as an information-generating act. If unresolved work was represented as specialist-considered uncertainty, later clinicians could reasonably begin from the partition rather than reconstruct the original feet–gait–tone problem. That is portable apparent knowledge: not necessarily false statements, but a representation that carries more epistemic closure than the underlying work earned. That point strengthens the central allegation itself.", "clin": ["CLIN-001142", "CLIN-001263", "CLIN-001621"]}, {"num": 37, "title": "Downstream clinicians inherited authority, not the bedside process", "body": "Later clinicians did not witness the July bedside examination, the alleged Protest or the drafting process. They inherited the specialist product. That distinction is central to the allegation. A future GP, nurse, podiatrist or neurologist can reasonably assume that “Not clear” reflects adequate specialist inquiry rather than an incompletely worked relationship. They inherit the conclusion without necessarily inheriting the evidential weaknesses behind it. Good-faith reliance therefore does not defeat the case; it explains propagation. The stronger the originating specialist authority, the less blame is needed downstream. That distinction directly strengthens the central allegation being advanced here. That matters clinically too.", "clin": ["CLIN-001142", "CLIN-001914", "CLIN-002282", "CLIN-002425"]}, {"num": 38, "title": "The bucket can accumulate descendants that resemble proof", "body": "Once neuropathy becomes an authorised object, later events can add documentary mass without adding independent proof. Neuropathy-shaped history-taking, pregabalin prescribing, nursing shorthand, patient adoption of terminology and overlap investigations can all be consequences of the original classification. The central allegation therefore separates descendant evidence from independent evidence. A later note saying “neuropathic pain” may reflect genuine observation, inherited vocabulary or both. The danger is circularity: the category helps generate the records later cited as evidence that the category was always reasonable. This does not require fabrication. That distinction directly strengthens the central allegation being advanced here. That matters clinically too.", "clin": ["CLIN-001142", "CLIN-002425", "CLIN-002574", "CLIN-002675", "CLIN-002777", "CLIN-003239"]}, {"num": 39, "title": "The patient can inherit the institution’s vocabulary", "body": "By 2023 the patient himself was using terms such as “peripheral neuropathy” and “neuropathic pain.” That later usage cannot be projected backward to prove he supplied “burning” or neuropathy language in July 2017. The central allegation treats patient vocabulary as potentially path-dependent. Patients learn from specialists, diagnoses, prescriptions and repeated explanations. When they later use institutional language, the record can make that language appear retrospectively patient-originated unless provenance is protected. This is not to deny patient agency. It is to recognise informational inheritance. That is why this point belongs inside the central allegation, not beside it. That matters clinically too.", "clin": ["CLIN-001142", "CLIN-002425", "CLIN-002675"]}, {"num": 40, "title": "Treatment can make a hypothesis look more established", "body": "Pregabalin treatment gave the neuropathy-shaped pain problem therapeutic reality. Prescribing may have been entirely reasonable, and benefit may have been genuine. Yet the central allegation warns against converting treatment consequence into diagnostic confirmation. Once a patient is on high-dose pregabalin, later records can look increasingly neuropathy-shaped simply because care has been organised around that possibility. The medication list becomes part of the narrative footprint. This is endogenous evidence production: the hypothesis changes the treatment environment, and the treatment environment generates records that appear to support the hypothesis. That is why this point belongs inside the central allegation, not beside it.", "clin": ["CLIN-002675", "CLIN-003239"]}, {"num": 41, "title": "Fabry testing enlarged the neuropathy object without proving it", "body": "Fabry testing is similarly double-edged. It demonstrates genuine clinical openness to an overlap explanation and should be credited as such. But its existence also enlarges the documentary presence of neuropathy. The central allegation does not say testing was wrong. It says an investigation triggered by a hypothesis cannot later function as independent proof that the hypothesis had a strong historical foundation. When Fabry was negative, generic neuropathy remained available. The category could expand through investigation and then contract around the negative result without disappearing. That is why this point belongs inside the central allegation, not beside it. That matters ethically.", "clin": ["CLIN-002425"]}, {"num": 42, "title": "The frame could absorb neurological contradictions locally", "body": "The inherited architecture did not need to deny evidence that the feet were neurologically influenced. It could absorb each contradiction locally. A foot throw could be Parkinsonian. Cramping could be OFF dystonia. Shuffling and leg pain could be OFF-related. Sinemet could improve pain. Structural lesions could remain real. Pregabalin could help another component. The central allegation is precisely that this flexibility protected the global partition. New facts crossed boundaries without forcing the boundaries themselves to be redrawn. A model that can accommodate everything may appear sophisticated while becoming difficult to falsify. That point strengthens the central allegation itself. That matters.", "clin": ["CLIN-001914", "CLIN-002282", "CLIN-002425", "CLIN-002777", "CLIN-003239"]}, {"num": 43, "title": "High local activity can coexist with global non-revision", "body": "The record contains substantial care, repeated review, medication changes and genuine reconsideration. The central allegation must not caricature this as clinical inactivity. Its stronger claim is that activity occurred within a relatively stable global architecture. This is constrained corrigibility: high local degrees of freedom, reduced global degrees of freedom. Clinicians could alter doses, add diagnoses, recognise OFF phenomena and investigate alternatives without revisiting what the original feet–movement relationship meant. That distinction is ethically important because busy care can conceal structural inertia. The question is not whether clinicians did things. That distinction belongs inside the central allegation itself. That matters ethically.", "clin": ["CLIN-001914", "CLIN-002282", "CLIN-002425", "CLIN-002777"]}, {"num": 44, "title": "The record can become an evidence-generating environment", "body": "The deepest systems allegation is that the 2017 architecture may have shaped not only interpretation but the later evidence itself. Once neuropathy became a legitimate object, it influenced vocabulary, treatments, investigations, referrals and patient self-understanding. Those downstream processes then generated new records saturated with the category. The central allegation therefore describes an evidence-generating environment. Later documentary continuity is partly endogenous to the founding frame. This sharply limits the value of “eight years of consistent records” as independent validation. That is why this evidence must explain the single alleged mechanism, not be broken away into a safer subsidiary theory. That matters.", "clin": ["CLIN-001142", "CLIN-002425", "CLIN-002675", "CLIN-003239"]}, {"num": 45, "title": "The record can be internally coherent and still epistemically wrong", "body": "A coherent longitudinal record is not necessarily a correct one. The central allegation targets precisely this danger. Once categories are stable, later notes can be intelligible, treatments can be rational within their compartments, and explanations can remain professionally plausible. Internal coherence may then become a substitute for external reconstruction of the patient’s unresolved problem. The ethical question is whether the system tested the architecture against the body or increasingly interpreted the body through the architecture. Coherence is valuable, but it is not confirmation. That is why this point belongs inside the central allegation, not beside it. That matters clinically too.", "clin": ["CLIN-001142", "CLIN-002425", "CLIN-002777", "CLIN-003239"]}, {"num": 46, "title": "The omitted Protest corrupts the apparent independence of continuity", "body": "The alleged omission matters again when later continuity is used defensively. If the founding record did not preserve that the patient challenged the foot disposition before closure, later years of apparent acceptance and continuity acquire exaggerated evidential weight. The record can look as though the original architecture was uncontroversial until the patient changed position much later. The central allegation says that is an artefact of omission. A suppressed fork makes the chosen path look like the only path. That is why this evidence must explain the single alleged mechanism, not be broken away into a safer subsidiary theory. That matters.", "clin": ["CLIN-004613"]}, {"num": 47, "title": "Recursive validation is the systems-level danger", "body": "The central allegation culminates in a recursive loop: the 2017 synthesis creates an information architecture; later care proceeds inside it; later records are generated in its language; those records accumulate; institutional review then cites the accumulated history as evidence that the original reasoning was reasonable. The map constrains the journey, and the journey is offered as proof that the map was right. No conspiracy is required. Ordinary reliance is enough. That is why governance must separate independent evidence from documentary descendants. That is why this point belongs inside the central allegation, not beside it. That belongs inside the central allegation.", "clin": ["CLIN-001142", "CLIN-002425", "CLIN-003239", "CLIN-005050"]}, {"num": 48, "title": "The 2018 procyclidine dechallenge was a boundary test", "body": "The procyclidine withdrawal evidence is pivotal because it is patient-specific and dynamic. The treating neurologist recorded that the outside-left-foot phenomenon was the first thing to change rapidly when procyclidine was withdrawn, alongside worsening tension and movement. The central allegation does not claim a drug literally created or removed a corn. It uses the observation more carefully: the focal foot state was neurologically treatment-sensitive. That should have pressured the original separation. The force of the point lies in its place within the single alleged mechanism, where omission, partition, inheritance and later validation operate together. That point strengthens the central allegation itself.", "clin": ["CLIN-001914"]}, {"num": 49, "title": "The left-sided convergence acts as an anatomical tracer", "body": "The record repeatedly returns to the left lower limb and outside-left-foot territory: a dystonic-looking left lower-limb phenomenon, recurrent fifth-MTPJ pathology and rapid return of the outside-left-foot problem during treatment withdrawal. No single observation proves a unified mechanism. Their convergence nonetheless creates an anatomical tracer across fragmented records. The central allegation argues that the system held complementary pieces without joining them. Podiatry knew the recurrent focal mechanical site; Neurology knew the lower-limb state changed neurologically. A serious integrative record should ask whether abnormal movement contributed to abnormal loading. The missing join becomes more conspicuous as the same territory reappears across specialties.", "clin": ["CLIN-000899", "CLIN-002874", "CLIN-003004", "CLIN-001085", "CLIN-001914"]}, {"num": 50, "title": "Podiatry mechanics and Neurology dynamics were complementary", "body": "Podiatry repeatedly provided real mechanical information: focal callus, fifth-MTPJ involvement, toe deformity, offloading and local treatment. Neurology provided dynamic information: dystonic-looking gait, treatment responsiveness, Parkinsonian movement and later OFF phenomena. The central allegation says these were not rival truths. They were complementary descriptions of the same load-bearing system. Fragmentation became dangerous when each specialty’s truth was allowed to justify its own compartment without a durable owner for integration. Podiatry could treat what happened at the foot; Neurology was positioned to ask why the pattern recurred or changed with neurological state. The record’s failure is alleged at the interface. That matters.", "clin": ["CLIN-000899", "CLIN-002874", "CLIN-003004", "CLIN-001914", "CLIN-002282"]}, {"num": 51, "title": "The 2020 foot throw crossed the original boundary", "body": "By 2020 Neurology itself described the foot-throw phenomenon as “actually parkinsonian” because dorsiflexion, plantarflexion, inversion and eversion strength were normal. That is a direct boundary crossing. A lower-limb phenomenon that resembles foot drop is explicitly reassigned to the Parkinsonian movement disorder. The central allegation asks what this reclassification did to the earlier painful-foot partition. Local updating is not enough. If one conspicuous foot phenomenon becomes neurological, the system should consider whether the historical feet–gait relationship requires reconstruction. The record shows the local interpretation. That is why this point belongs inside the central allegation, not beside it. That matters clinically too.", "clin": ["CLIN-002282"]}, {"num": 52, "title": "The 2023 crisis showed neuropathy treatment had not solved the problem", "body": "By March 2023 the patient was taking 600 mg/day pregabalin yet reported debilitating bilateral foot and leg pain and no quality of life. The central allegation uses this not as proof against neuropathy but as a falsification pressure event. A hypothesis directing major treatment had failed to produce adequate control while the feet remained the dominant lived problem. That should increase the demand to reconsider mechanism, especially given earlier neurological treatment-state evidence. Instead, the crisis still entered Movement Disorders as “? neuropathic pain.” The question is not whether that shorthand was reasonable. That distinction belongs inside the central allegation itself.", "clin": ["CLIN-002623", "CLIN-002675"]}, {"num": 53, "title": "The 2023 misalignment made the frame dispute explicit", "body": "The July 2023 consultation is a crucial moment because the neurologist expressly records a “misalignment” between explanatory positions. The patient’s concerns that much related to the feet as a separate problem were described as reasonable and justifiable, while the clinician characterised his own position through Parkinsonian explanation. The central allegation does not rely on selecting either side as correct. It relies on the fact that the founding relationship had become openly contested. Once the frame itself is disputed, ethical care requires more than another local label. That distinction directly strengthens the central allegation being advanced here. That matters clinically too.", "clin": ["CLIN-002425"]}, {"num": 54, "title": "OFF dystonia reopened the neurological route from inside Neurology", "body": "The same 2023 period contains repeated left-leg cramping and explicit consideration of Parkinsonian dystonia, more likely OFF dystonia. That matters because the neurological route does not come from the patient’s later theory; it re-emerges from treating Neurology itself. The central allegation therefore asks why this recognition did not trigger a historical reconstruction of the feet–movement relationship. A local OFF-dystonia label can solve the current episode while leaving the founding partition untouched. The force of the point lies in its place within the single alleged mechanism, where omission, partition, inheritance and later validation operate together. That belongs inside the central allegation.", "clin": ["CLIN-002425"]}, {"num": 55, "title": "The nurse’s OFF-related assessment crossed the boundary again", "body": "Later in 2023 the Parkinson’s nurse assessed leg pain and shuffling as OFF-related and considered the Parkinsonism undertreated. That is another internally generated boundary crossing. The central allegation does not elevate the nurse’s assessment into final causation. It uses it as accumulating pressure against a stable separate-foot architecture. Pain, mobility and dopaminergic state were clinically linked by the treating service. The system now had multiple reasons to treat the feet–movement relationship as dynamic. Yet a conditional neuropathy object remained available. That is why this evidence must explain the single alleged mechanism, not be broken away into a safer subsidiary theory.", "clin": ["CLIN-002574"]}, {"num": 56, "title": "Maximum pregabalin plus persistent pain was a failed closure signal", "body": "The complaint response later acknowledged that pregabalin had incomplete effect even at maximum dose. That admission matters because the neuropathy-oriented treatment pathway had not delivered explanatory or therapeutic closure. The central allegation does not claim drug failure disproves neuropathy. It argues that persistent severe pain under maximal treatment should have reduced confidence in treating neuropathy as a sufficient organizing explanation. Instead, the category could survive by contracting to a partial contributor. That is asymmetric falsifiability. Success would support the hypothesis; failure need not meaningfully weaken it. That distinction directly strengthens the central allegation being advanced here. That matters clinically too.", "clin": ["CLIN-002675", "CLIN-003239"]}, {"num": 57, "title": "Sinemet benefit was known before the final crisis", "body": "The 2025 complaint response states that Sinemet had long been known to help the patient’s experience of morning pain. That retrospective defence is important because it confirms that dopaminergic modulation of the feet was not a sudden March 2025 discovery. The central allegation therefore asks what diagnostic work was done with that knowledge. It is not enough to say pain can improve nonspecifically in Parkinsonism. That explanation may be clinically plausible, but it also functions defensively by allowing neurological treatment response without reopening pain origin. That is why this point belongs inside the central allegation, not beside it. That matters.", "clin": ["CLIN-002777", "CLIN-003239"]}, {"num": 58, "title": "Sinemet CR made the contradiction impossible to ignore", "body": "Sinemet CR was prescribed in March 2025 and, according to the clinician’s response, produced profound relief. The central allegation does not overclaim that this response proves every historical foot symptom was dopaminergic or dystonic. Its force lies elsewhere. After years of conditional neuropathy language, incomplete pregabalin benefit and repeated neurological boundary crossings, profound improvement with overnight dopaminergic coverage made the inherited architecture visibly unstable. The body delivered a high-salience contradiction. The force of the point lies in its place within the single alleged mechanism, where omission, partition, inheritance and later validation operate together. That point strengthens the central allegation itself.", "clin": ["CLIN-002777", "CLIN-003239"]}, {"num": 59, "title": "Pain modulation of whatever cause is both plausible and self-protective", "body": "The clinician’s defence—that Parkinson’s and Sinemet can alter the experience of pain “of whatever cause”—may be clinically reasonable. That is precisely why it is so important analytically. It can absorb one of the strongest pieces of contrary evidence without surrendering the separate-pain hypothesis. The central allegation identifies this as a self-protective property of the architecture. Dopaminergic response no longer tests causation because any response can be classified as modulation. If so, what observation could ever force reconsideration of the underlying bucket? That is why this point belongs inside the central allegation, not beside it. That belongs inside the central allegation.", "clin": ["CLIN-002777", "CLIN-003239"]}, {"num": 60, "title": "By 2025 neuropathy was still conditional after eight years", "body": "The March 2025 formulation—“If there is a degree of peripheral neuropathy here”—is devastating to the architecture precisely because it is cautious. After years of neuropathy-shaped language, treatment and investigation, the proposition remains conditional. The central allegation is not that clinicians falsely declared a diagnosis. It is that an unresolved possibility acquired enough practical solidity to organise care without ever becoming correspondingly secure. The bucket survived because it did not need to win. It only needed to remain possible. That is why this evidence must explain the single alleged mechanism, not be broken away into a safer subsidiary theory. That matters.", "clin": ["CLIN-002777", "CLIN-003239"]}, {"num": 61, "title": "The 2025 defence answers a weaker complaint", "body": "The clinician’s 2025 response strongly rebuts a crude allegation that Parkinson’s was ignored and neuropathy definitively diagnosed instead. Parkinson’s was clearly central, treatment evolved and neuropathy remained qualified. But the central allegation is different. It asks how much causal and organisational weight the neuropathy/separation architecture carried despite never becoming definitive, and whether the feet–movement relationship was globally reconstructed. “Parkinson’s was always central” does not answer that. “Neuropathy was never exclusive” does not answer that. “Sinemet was used since 2021” does not answer that. That is why this point belongs inside the central allegation, not beside it. That matters clinically too.", "clin": ["CLIN-003239"]}, {"num": 62, "title": "The defence demonstrates the architecture’s elasticity", "body": "The 2025 response is valuable evidence because it shows the mature architecture defending itself. Neuropathy was never definitive; Parkinson’s was always central; pregabalin treated neuropathic pain of whatever cause; Sinemet helped pain but did not identify its source; alcohol was merely a reasonable concern; Fabry testing showed openness. Each proposition may be true. Together they demonstrate how the model can absorb virtually every later development while preserving the original partition. The central allegation therefore uses the defence not primarily as proof of wrongdoing but as a functional map. The system’s flexibility protected continuity. That point strengthens the central allegation itself.", "clin": ["CLIN-003239"]}, {"num": 63, "title": "The complaint rupture followed long trust, not chronic hostility", "body": "The clinician’s own response describes a relationship he believed had been very good and personally warm, including a “Tom and Liam” basis. That matters to the central allegation because it complicates any suggestion that the later challenge simply reflects longstanding antagonism. The patient appears to have trusted the care pathway for years before the March 2025 treatment experience triggered historical reappraisal. A late complaint after long reliance can be evidence of rupture, not opportunism. The force of the point lies in its place within the single alleged mechanism, where omission, partition, inheritance and later validation operate together. That matters ethically.", "clin": ["CLIN-003239"]}, {"num": 64, "title": "The GP became a same-observer test of informational inheritance", "body": "The same GP who originally framed an integrated feet–gait–tone problem later referred the patient for urgent external review while describing questioning of the diagnosis, internet research and concern about disengagement. The central allegation does not blame the GP. It uses the same doctor as a comparator of information states. Before specialist intervention, the GP saw an open integrated problem. After years of specialist inheritance, the patient’s effort to recover that relationship could appear as resistance to an established diagnosis. That is exactly how authoritative records propagate. That distinction directly strengthens the central allegation being advanced here. That matters clinically too.", "clin": ["CLIN-000064", "CLIN-000100", "CLIN-000190", "CLIN-000210", "CLIN-000847"]}, {"num": 65, "title": "The 2025 external referral shows persistence recoded as resistance", "body": "The St Vincent’s referral is powerful because it captures the downstream state before external clarification. The patient is described as questioning the whole diagnosis, immersed in internet research and at risk of burning bridges, while seeking movement-disorders and dystonia expertise. The central allegation says this is what happens when the original Protest does not travel. A concern allegedly raised before discharge can later look newly generated, excessive or destabilising. The referral may be entirely compassionate and appropriate; its language nonetheless shows the inherited frame governing interpretation of the patient’s dissent. That distinction directly strengthens the central allegation being advanced here.", "clin": []}, {"num": 66, "title": "Institutional review risked testing descendants against their ancestor", "body": "The SIMT outcome relied on the accumulated history to conclude that care decisions were appropriate, alternatives were considered and no deficit existed. The central allegation does not dismiss multidisciplinary review by assertion. It asks what evidential independence the review possessed. If the challenged 2017 architecture shaped later terminology, treatment, investigations and summaries, then the resulting record cannot automatically function as external confirmation of that architecture. A review that begins from the completed specialist narrative may test the descendants against the ancestor that generated them. That is why this point belongs inside the central allegation, not beside it. That matters ethically.", "clin": ["CLIN-001142", "CLIN-003239", "CLIN-005050"]}, {"num": 67, "title": "No deficit in care does not answer record integrity", "body": "A governance conclusion that there was “no deficit in care” may address treatment reasonableness while leaving the central allegation untouched. The allegation is not reducible to whether starting Sinemet in 2021 was defensible or whether alternative diagnoses appeared in the notes. It concerns whether the originating record accurately represented the epistemic status of an unresolved feet–movement relationship after alleged notice. A clinically reasonable pathway can still begin from a misleading information state. The force of the point lies in its place within the single alleged mechanism, where omission, partition, inheritance and later validation operate together. That strengthens the allegation directly.", "clin": ["CLIN-005050"]}, {"num": 68, "title": "The governance response illustrates retrospective narrative smoothing", "body": "By 2026 governance could say that later dystonia did not undermine the earlier process and that updated diagnoses need not reopen prior determinations. That position may be administratively coherent, but the central allegation exposes its danger. New information can be accepted prospectively while the historical architecture remains insulated from reconstruction. This is retrospective narrative smoothing: change is absorbed as later development rather than allowed to reveal that an earlier relationship may have been misrepresented or underdeveloped. The point is not that every new diagnosis invalidates prior care. That is why this point belongs inside the central allegation, not beside it.", "clin": ["CLIN-005515"]}, {"num": 69, "title": "Accuracy as archive is not enough if governance remains misleading", "body": "The Article 16 refusals emphasised that historical records can accurately preserve what a clinician believed at the time. The central allegation accepts that principle but presses beyond it. A record can be accurate as archive yet misleading as governance if later actors inherit its settled force without equally inheriting the reasons it should remain revisable. The issue is not erasing historical opinion. It is whether annotation, supplementation, restriction or contextualisation is needed when the record’s continuing use conveys an epistemic status the underlying process did not earn. That is why this point belongs inside the central allegation, not beside it.", "clin": ["CLIN-005083", "CLIN-005515"]}, {"num": 70, "title": "Corrigibility is the ethical test of a provisional frame", "body": "A provisional hypothesis is not unethical because it later proves incomplete. The central allegation becomes serious when provisionality loses practical meaning. The record may continue to contain cautious words while the management system treats the frame as settled infrastructure. Corrigibility asks whether contrary evidence could actually reduce the frame’s authority, trigger reconstruction, preserve dissent or change future reliance. The alleged pattern here is troubling because neuropathy could remain conditional, Parkinsonian boundary crossings could be locally absorbed, and institutional review could still preserve the founding architecture. That is why this point belongs inside the central allegation, not beside it. That matters.", "clin": ["CLIN-005083", "CLIN-005515", "CLIN-006192"]}, {"num": 71, "title": "Recording the patient is not the same as letting the patient govern inquiry", "body": "The patient was documented extensively. His intelligence, insight, questions, pain and treatment experiences appear repeatedly. The central allegation therefore should not claim he was simply unheard. Its sharper claim is that he could be heard as data without being heard as an error signal about the system’s own model. A patient can speak while the frame remains sovereign. The Protest, later pain reports, explanatory misalignment and treatment response could all enter the record without gaining enough governing force to reconstruct the architecture. That is why this point must remain inside the single alleged mechanism rather than become a separate complaint.", "clin": ["CLIN-001263", "CLIN-001621", "CLIN-004613", "CLIN-002425", "CLIN-003239"]}, {"num": 72, "title": "The information hazard lived between departments", "body": "The body remained integrated while records became modular. Neurology held movement-state knowledge; Podiatry held focal mechanical knowledge; primary care held longitudinal function and pain; later governance held accumulated documentation. The central allegation identifies the information hazard between those modules. Each professional can act reasonably within a compartment while the clinically decisive relationship disappears across boundaries. This is not ordinary fragmentation in the abstract. It is fragmentation stabilised by an authoritative founding summary that already allocated explanatory futures. Once ownership is distributed, no one may feel responsible for rebuilding the whole. That distinction directly strengthens the central allegation being advanced here.", "clin": ["CLIN-000847", "CLIN-000899", "CLIN-002874", "CLIN-003004", "CLIN-001914", "CLIN-002425"]}, {"num": 73, "title": "The record became more stable than the biology", "body": "The analytical reservoir’s final formulation captures the systems problem: the record became more stable than the biology. The patient’s phenotype changed under treatment, movement findings crossed categories, pain fluctuated with medication, structural lesions recurred, dystonia entered later reasoning and neuropathy remained conditional. Yet the basic causal partition persisted. The central allegation uses this mismatch as evidence of epistemic rigidity. Biology should be allowed to destabilise records. When the opposite occurs—records determine what biology is permitted to mean—clinical information governance has failed. That is why this point belongs inside the central allegation, not beside it. That belongs inside the central allegation.", "clin": ["CLIN-001142", "CLIN-001914", "CLIN-002282", "CLIN-002425", "CLIN-002777", "CLIN-006192"]}, {"num": 74, "title": "The later PRKN report is a retrospective biological stress test", "body": "The 2026 genetic report must be used with precision. It identifies pathogenic PRKN variants and describes lower-limb dystonia as characteristic of PARK2, sometimes remaining isolated for years, with good L-DOPA response. The central allegation does not use that information to claim 2017 clinicians should have known the genotype. It uses it to test what the earlier architecture gave explanatory priority. The later biology shows that lower-limb dystonia belongs centrally inside the disease process already being considered in 2017. The observed dystonic-looking limb was therefore not biologically trivial. That is why this point belongs inside the central allegation, not beside it.", "clin": ["CLIN-006192"]}, {"num": 75, "title": "PRKN makes the GP’s integrated phenotype retrospectively intelligible", "body": "Read carefully, the PRKN endpoint does not rewrite the GP referral; it illuminates it. Primary care saw painful feet, abnormal gait, pathological tone, movement-initiation problems and functional deterioration before a specialist label settled the case. Later genetics says PARK2 can characteristically include lower-limb dystonia and that dystonia may remain isolated for years. The central allegation therefore gains a powerful cross-translation: the GP’s integrated clinical object was not naïve noise later corrected by specialist separation. It contained features that later biology makes coherent inside one disease framework. That does not make every foot symptom dystonic. That belongs inside the central allegation.", "clin": ["CLIN-000064", "CLIN-000100", "CLIN-000190", "CLIN-000210", "CLIN-000847", "CLIN-006192"]}, {"num": 76, "title": "The later biology reverses the documentary hierarchy", "body": "In the 2017 synthesis, peripheral neuropathy gained a named future while the feet–dystonia relationship remained comparatively undeveloped. The 2026 biology reverses that documentary hierarchy. PRKN/PARK2 places dystonia inside the principal molecular disease, while the old neuropathy pathway remains unproved and conditional even in 2025. The central allegation uses that reversal as a retrospective audit of explanatory allocation. It does not say hindsight proves negligence. It says the record’s allocation of sophistication turned out to favour the branch with weaker long-term consolidation over an observed phenomenon that later proved biologically central. That distinction directly strengthens the central allegation being advanced here.", "clin": ["CLIN-001142", "CLIN-001520", "CLIN-001742", "CLIN-006192"]}, {"num": 77, "title": "The St Vincent’s confirmation joins Parkinsonism and dystonia", "body": "St Vincent’s later states that the patient’s Parkinsonism and dystonia are due to compound heterozygous Parkin mutations. That external conclusion is important because it joins two categories the earlier architecture treated unevenly. The central allegation does not convert it into proof that the painful feet were wholly dystonic. Instead, it establishes that the dystonic component belonged inside the principal disease process. The force of the point lies in its place within the single alleged mechanism, where omission, partition, inheritance and later validation operate together. That is why this point belongs inside the central allegation, not beside it. That matters ethically.", "clin": ["CLIN-003226"]}, {"num": 78, "title": "The allegation is not that Parkinsonism was misdiagnosed", "body": "The strongest final argument must repeatedly refuse an easy straw man. Later genetics supports Parkinsonism; the case is not that Parkinsonism was fictional. The central allegation is that one component of the neurological movement disorder—the lower-limb dystonic relationship to the painful feet—was not given equivalent explanatory development, while a peripheral-neuropathy bucket acquired durable authority. That distinction matters because defending the Parkinson’s diagnosis does not answer the allegation. Indeed, confirming Parkinsonism can strengthen it: the observed dystonic-looking limb belonged within the real disease process. The ethical question is not whether Neurology found Parkinsonism. That distinction belongs inside the central allegation itself.", "clin": ["CLIN-001128", "CLIN-006192", "CLIN-003226"]}, {"num": 79, "title": "The allegation is not that structural foot disease was unreal", "body": "The final submission must also refuse the opposite straw man. Structural disease was genuine. Corns, calluses, pes planus, hammertoes and focal fifth-MTPJ pathology demanded treatment. The central allegation depends on preserving those truths because mixed mechanisms are the point. A structurally real lesion can be shaped by abnormal posture, loading or movement. A neurologically influenced foot can still need Podiatry. The ethical failure alleged is not false structural diagnosis; it is explanatory externalisation before relational integration. The more genuine the mechanical findings, the more valuable a Neurology–Podiatry join becomes. That distinction belongs inside the central allegation itself. That matters ethically.", "clin": ["CLIN-000899", "CLIN-002874", "CLIN-003004", "CLIN-001085"]}, {"num": 80, "title": "The allegation is not that neuropathy was impossible", "body": "Peripheral neuropathy was a medically legitimate possibility. The final argument should say so without hesitation. The central allegation is stronger because it does not require impossibility. It asks why a hypothesis that remained unproved acquired enough explanatory and managerial force to carry the painful-foot territory for years while observed and treatment-responsive neurological evidence accumulated. “Reasonable possibility” and “durable organising category” are different things. Medicine routinely acts under uncertainty; ethical scrutiny begins when one uncertain branch becomes infrastructure without a clear exit rule. That is why this point must remain inside the single alleged mechanism rather than become a separate complaint.", "clin": ["CLIN-001142", "CLIN-002777", "CLIN-003239"]}, {"num": 81, "title": "The allegation is not a softer failure-to-reconsider case", "body": "The first 90 points must not collapse into generic anchoring or failure to reconsider. Those descriptions are too weak. The central allegation begins earlier and goes deeper: after alleged direct notice that the feet remained unresolved, the authoritative record omitted the warning and assembled a compact peripheralising architecture that made unresolved work appear sufficiently considered to travel. Later failure of reconstruction is a consequence of that founding information state, not a substitute theory. The case therefore connects source-level construction to longitudinal lock-in. Even if intent remains unproved, the documentary function is still testable. That point strengthens the central allegation itself.", "clin": ["CLIN-001142", "CLIN-004613", "CLIN-001914", "CLIN-002425", "CLIN-003239"]}, {"num": 82, "title": "The ethical threshold is misrepresentation of epistemic status", "body": "The most serious concept in the case is misrepresentation of epistemic status. A record need not contain a literal falsehood to mislead future care. It can transform “we have not adequately worked out this relationship” into “we have considered it; structural and possible neuropathic explanations exist; the remaining uncertainty is an acceptable specialist endpoint.” The central allegation says the omitted Protest and compact construction may have performed exactly that transformation. If so, the ethical problem exceeds diagnostic error. It concerns candour, record integrity and misuse of specialist documentary authority. That distinction belongs inside the central allegation itself. That matters ethically.", "clin": ["CLIN-001142", "CLIN-004613", "CLIN-001263", "CLIN-001621"]}, {"num": 83, "title": "Functional effect can be argued before subjective intent is proved", "body": "The allegation can be severe without pretending current evidence proves conscious deception. Documentary function and subjective intent are different questions. The final record can be shown to omit the Protest allegation, structure the feet peripherally, travel downstream and support later self-validation even before provenance establishes why particular words were chosen. The central allegation therefore proceeds in layers: function is presently arguable; post-Protest authorship chronology is the route to intent. This is not dilution. It is forensic strength. The institution should not escape scrutiny merely because motive remains unproved. That distinction directly strengthens the central allegation being advanced here. That matters.", "clin": ["CLIN-001142", "CLIN-001914", "CLIN-002425", "CLIN-003239"]}, {"num": 84, "title": "Native provenance is the decisive unresolved evidence", "body": "The strongest investigative demand is now straightforward: produce the drafts, dictation sequence, timestamps, version history, audit metadata, source notes and any witness material showing when the consequential July wording first appeared. The central allegation is falsifiable at precisely this point. If the phrase cluster substantially existed before the Protest from identifiable clinical sources, fresh post-notice construction narrows. If it emerged or materially changed afterward, lacked a bedside source and solved the exact closure problem the patient had raised, the suspicion becomes dramatically stronger. That is why this point belongs inside the central allegation, not beside it. That matters clinically too.", "clin": ["CLIN-001142", "CLIN-001263", "CLIN-001621", "CLIN-004613", "CLIN-004967"]}, {"num": 85, "title": "The institution should be asked why the Protest left no trace", "body": "The absence of the Protest from the surviving record cannot prove the event occurred, but neither can the record’s silence be used to defeat an omission allegation. The central allegation therefore turns silence into a disclosure question, not a fact claim. What ward, teaching, trainee, draft, dictation or audit material existed? What was searched? What was retained? Who controlled the final narrative? Why did a patient-facing summary preserve extensive cognition, counselling and understanding yet not preserve the alleged statement that the core problem remained unresolved? The ethical force lies in asymmetry. That point strengthens the central allegation itself. That matters.", "clin": ["CLIN-001263", "CLIN-001621", "CLIN-004613", "CLIN-004967"]}, {"num": 86, "title": "The institution should be asked what would have falsified neuropathy", "body": "A central question for any ethical reviewer is simple: what evidence would have caused the peripheral-neuropathy hypothesis to lose practical authority? The record shows potential support, treatment, overlap investigation and persistent qualification. It also shows maximum-dose pregabalin with severe pain, negative Fabry testing, neurological treatment-state dependence, Parkinsonian foot movement, OFF-dystonia reasoning and levodopa-related relief. Yet neuropathy survives as “if there is a degree.” The central allegation therefore challenges the falsification structure, not merely the conclusion. A hypothesis without a practical exit condition can become a permanent explanatory reserve. That distinction directly strengthens the central allegation being advanced here. That matters.", "clin": ["CLIN-001142", "CLIN-001914", "CLIN-002282", "CLIN-002425", "CLIN-002574", "CLIN-002675", "CLIN-002777", "CLIN-003239"]}, {"num": 87, "title": "The institution should be asked who owned the unresolved join", "body": "Another unavoidable question is ownership. Podiatry could own callus treatment. Neurology could own Parkinsonism. Primary care could coordinate. But who owned the unresolved relationship between dystonic movement, abnormal loading, structural lesions and pain? The central allegation says the pathway had destinations without a guaranteed return route. That is the care-pathway form of the same documentary mechanism. Once the record partitioned the problem, each service could act competently while the join belonged to nobody. Ethical review should identify the person or service responsible for rebuilding the whole when treatment-state evidence crossed departmental boundaries. That distinction belongs inside the central allegation itself.", "clin": ["CLIN-000847", "CLIN-000899", "CLIN-002874", "CLIN-003004", "CLIN-001914", "CLIN-002282", "CLIN-002425"]}, {"num": 88, "title": "The institution should be asked why continuity counts as validation", "body": "The later defences repeatedly invoke the length and detail of the record as evidence of careful management. The central allegation turns that argument around. If the founding architecture shaped the later record, continuity is partly an expected consequence of the challenged mechanism. Why should records generated inside the frame count as independent validation of the frame? Which later observations were genuinely external? Which simply repeated inherited categories? Which investigations were initiated because neuropathy had already been authorised? Which patient phrases reflected institutional vocabulary? Ethical review must disaggregate lineage before treating consistency as corroboration. That point strengthens the central allegation itself.", "clin": ["CLIN-001142", "CLIN-001914", "CLIN-002425", "CLIN-003239", "CLIN-005050"]}, {"num": 89, "title": "The institution should be asked why later biology did not trigger reconstruction", "body": "Once external genetics linked Parkinsonism and dystonia to PRKN, the institution faced a governance question distinct from hindsight blame. Later biology did not prove every historical pain episode was dystonic, but it materially changed the retrospective significance of the early dystonic-looking lower limb. The central allegation asks why that development should merely update the present diagnosis while leaving the historical information architecture untouched. Corrigibility means later evidence can change what future actors are allowed to rely upon from old records. That is why this evidence must explain the single alleged mechanism, not be broken away into a safer subsidiary theory.", "clin": ["CLIN-005515", "CLIN-006192", "CLIN-003226"]}, {"num": 90, "title": "The final moral accusation concerns control over the patient’s knowledge state", "body": "At its deepest level, the case concerns who controlled the representation of the patient’s body. The patient possessed pain, movement, memory and treatment effects. The institution possessed the specialist record through which later clinicians, governance bodies and eventually the patient himself would understand those experiences. The central allegation is that representational power was exercised asymmetrically: the Protest did not travel, while a compact peripheralising explanation did. Records govern future attention. The ethical wrong alleged is therefore not simply being mistaken; it is allowing documentary authority to harden unresolved clinical work into apparent specialist sufficiency capable of governing years of care.", "clin": ["CLIN-001142", "CLIN-001263", "CLIN-001621", "CLIN-004613", "CLIN-003239", "CLIN-005083", "CLIN-005515"]}, {"num": 91, "title": "The DaTscan created differential settlement after physical discharge", "body": "Physical discharge did not end the making of the authoritative specialist account. The finalisation addendum records that the DaTscan was completed after discharge and inserted before the letter travelled. That objectively strengthened the Parkinsonian proposition available to downstream readers. The feet relationship, however, was not equivalently re-adjudicated when that new evidence arrived; it remained inside the existing separate/peripheral/Not-clear architecture. The central allegation therefore gains a differential-settlement point: one proposition was upgraded after the patient left while its neighbouring unresolved relationship travelled substantially unchanged. That is why this point belongs inside the central allegation, not beside it. That matters. That matters.", "clin": ["CLIN-001128", "CLIN-001263", "CLIN-001621"]}, {"num": 92, "title": "Primary-diagnosis finality coexisted with unresolved foot meaning", "body": "The discharge artefact states `Primary Diagnosis: Parkinsons Disease` while elsewhere preserving the painful-foot relationship as potentially separate, neuropathic and `Not clear`. The central allegation does not argue that Parkinsonism lacked evidential support. It argues that different propositions acquired different degrees of institutional finality inside one document. Parkinsonism became the named primary diagnosis; the feet became an organised residual uncertainty. That asymmetry matters because downstream systems do not treat every sentence equally. A primary diagnosis governs records, treatment and reliance more powerfully than a qualified unresolved paragraph. The unresolved component therefore entered the future already subordinated to a settled organising diagnosis.", "clin": ["CLIN-001142", "CLIN-000931"]}, {"num": 93, "title": "As per above converted narrative allocation into the formal plan", "body": "The founding letter explicitly says part of its purpose was to supply the patient, consolidate discussions, assist debriefing and set out a clear plan. Its formal `Plan/Recommendations` then states `As per above`, incorporating the preceding narrative into forward management. This is crucial to the central allegation. The neuropathy/separation language was not merely historical prose sitting harmlessly beside the plan; the document itself made the narrative the plan. Once that occurred, explanatory allocation acquired operational force. That is why the point must remain part of the single alleged mechanism rather than become a separate complaint. That belongs within the single allegation.", "clin": ["CLIN-001142", "CLIN-004613", "CLIN-001411", "CLIN-001594"]}, {"num": 94, "title": "Understanding of treatment cannot be converted into agreement with the foot disposition", "body": "The record repeatedly credits the patient with intelligence, questions and a `good understanding` of why levodopa or dopamine agonists were being delayed. That is evidence about counselling and treatment strategy. It is not evidence that he agreed the disabling feet had been adequately explained or safely allocated elsewhere. If the Protest occurred, the opposite closure-state information existed simultaneously: the patient understood the neurological discussion yet still said the feet had not been dealt with. The central allegation therefore rejects an epistemic substitution. That is why this point belongs inside the central allegation, not beside it. That strengthens the allegation directly.", "clin": ["CLIN-004613", "CLIN-001411", "CLIN-001594"]}, {"num": 95, "title": "Podiatry was being expedited as Parkinson’s, not proven independence", "body": "On 6 July the GP recorded that Podiatry would mark the case as priority `as Parkinson's`. That contemporaneous wording matters because it resists a later tendency to treat Podiatry as though its existence itself demonstrated that the feet belonged outside the neurological disorder. The practical foot pathway was being accelerated within a Parkinsonian context. The central allegation does not claim this proves the feet were dystonic or that Podiatry understood its role identically. It proves something narrower and damaging: departmental routing was not synonymous with explanatory separation even at the time. That distinction strengthens the central allegation itself. That matters.", "clin": ["CLIN-000899"]}, {"num": 96, "title": "Healy’s contemporaneous PARK2 view kept the monogenic route alive", "body": "By September 2017 Prof Healy wrote that the patient `probably has Park II`, recommended testing it first, recorded dramatic motor improvement on procyclidine and rasagiline, and noted that PARK II patients can manage for long periods on relatively low dopamine-replacement doses while becoming dyskinetic if over-used. This does not prove the painful feet were dystonic, nor does it show Healy ordered immediate levodopa. Its relevance is structural. A contemporaneous external specialist reinforced the same monogenic disease route later confirmed genetically and treated medication response as meaningful. That distinction strengthens the central allegation itself. That distinction strengthens the central allegation itself.", "clin": ["CLIN-001742"]}, {"num": 97, "title": "The record named a neuropathy question but no equivalent feet-dystonia question", "body": "The founding synthesis explicitly names `PARK 9 (the neuropathy question)` after already documenting a striking gait suggestive of `dystonic posture - NOT FOOT DROP` and considering PRKN/PARK2. That textual asymmetry deserves its own point. An unproved peripheral possibility received a named question and a monogenic future. The observed dystonic-looking lower limb did not receive an equivalent documented question asking whether painful feet, posture, loading and gait belonged partly to the same process. The central allegation is not that one phrase proves bias. That is why this point belongs inside the central allegation, not beside it. That strengthens the allegation directly.", "clin": ["CLIN-001085", "CLIN-001520"]}, {"num": 98, "title": "Non-holding of teaching and ward records cannot disprove the Protest", "body": "GUH later stated that it did not hold personal data for student involvement, student records, teaching-governance material or trainee assignments, and that the ward did not hold records for 2017 ward rounds. That response establishes a source gap; it does not establish that the alleged teaching encounter never happened. The distinction is essential because an omission allegation cannot logically be defeated by pointing to the finished record’s silence or to later non-holding of potentially corroborative records. The central allegation therefore treats missing institutional traces as an evidential limitation requiring caution, not as exculpatory proof. That belongs within the single allegation.", "clin": ["CLIN-004613", "CLIN-004967"]}, {"num": 99, "title": "SIMT validation followed explicit notice that the underlying record was disputed", "body": "Before the SIMT outcome, the patient expressly invoked Article 18 and asked that internal review not rely on uncorrected or unflagged data subject to the rectification dispute. The later SIMT outcome nevertheless states that the multidisciplinary team found the care appropriate and identified no deficit. This point makes no legal finding about whether Article 18 was validly engaged or breached. Its significance is informational and ethical: institutional validation occurred after explicit notice that the underlying historical data state itself was contested. That is why the point must remain part of the single alleged mechanism rather than become a separate complaint.", "clin": ["CLIN-005050", "CLIN-004916"]}, {"num": 100, "title": "The record should be judged against its own stated purpose of bridging understanding", "body": "In 2025 the clinician explained that his long letters were meant to be resources for patients, to bridge the gap between what was said or intended and what was heard or understood, and to document how decisions were made, when and by whom. That declared record-making ethic sharpens the central allegation. If the Protest occurred, the founding patient-facing account omitted precisely the event most necessary to understand whether the foot disposition had been accepted or challenged before closure. That is why the point must remain part of the single alleged mechanism rather than become a separate complaint. That matters ethically.", "clin": ["CLIN-004613", "CLIN-003257F", "CLIN-001411", "CLIN-001594"]}];
+let index = 0;
+let startX = null;
+let startY = null;
+let dragging = false;
+let dragX = 0;
+
+const cardThemes = [
+  ["rgba(255,214,84,.10)", "rgba(255,122,122,.08)"],
+  ["rgba(255,180,92,.10)", "rgba(255,92,92,.08)"],
+  ["rgba(255,232,118,.10)", "rgba(255,110,110,.08)"],
+  ["rgba(255,196,96,.10)", "rgba(255,86,120,.08)"],
+  ["rgba(255,220,90,.10)", "rgba(255,104,104,.08)"],
+  ["rgba(255,210,110,.10)", "rgba(255,80,110,.08)"]
+];
+
+const app = document.getElementById('app');
+const card = document.getElementById('card');
+const pointEl = document.getElementById('point');
+const counterEl = document.getElementById('counter');
+const titleEl = document.getElementById('title');
+const bodyEl = document.getElementById('body');
+const clinEl = document.getElementById('clin');
+const detailsEl = document.getElementById('details');
+const progressFill = document.getElementById('progressFill');
+const toast = document.getElementById('toast');
+const focusBtn = document.getElementById('focusBtn');
+const shareBtn = document.getElementById('shareBtn');
+
+function splitBody(text) {
+  const sentences = text.match(/[^.!?]+[.!?]+(?:["”']+)?|[^.!?]+$/g) || [text];
+  const intro = (sentences[0] || text).trim();
+  const rest = sentences.slice(1).join(' ').trim();
+  return { intro, rest };
+}
+
+function setCardTheme(num) {
+  if (num === 0) {
+    card.style.background =
+      "linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.015)), var(--card)";
+    return;
+  }
+  const theme = cardThemes[(num - 1) % cardThemes.length];
+  card.style.background =
+    `radial-gradient(circle at top left, ${theme[0]}, transparent 42%),` +
+    `radial-gradient(circle at bottom right, ${theme[1]}, transparent 46%),` +
+    `linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.015)), var(--card)`;
+}
+
+function renderBody(p) {
+  if (p.num === 0) {
+    bodyEl.innerHTML = `<p class="body-full">${escapeHtml(p.body)}</p>`;
+    return;
+  }
+  const parts = splitBody(p.body);
+  const intro = escapeHtml(parts.intro);
+  const rest = escapeHtml(parts.rest);
+  bodyEl.innerHTML = `<p class="body-intro">${intro}</p>` + (rest ? `<p class="body-rest">${rest}</p>` : '');
+}
+
+function escapeHtml(s) {
+  return s
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+}
+
+function fitBody() {
+  const intro = bodyEl.querySelector('.body-intro');
+  const rest = bodyEl.querySelector('.body-rest');
+  const full = bodyEl.querySelector('.body-full');
+  const bodyWrap = card.querySelector('.body-wrap');
+
+  const resizeElement = (el, minSize, step) => {
+    if (!el) return;
+    let size = parseFloat(getComputedStyle(el).fontSize);
+    let guard = 0;
+    while (bodyEl.scrollHeight > bodyWrap.clientHeight && size > minSize && guard < 30) {
+      size -= step;
+      el.style.fontSize = size + 'px';
+      guard++;
+    }
+  };
+
+  if (intro) intro.style.fontSize = '';
+  if (rest) rest.style.fontSize = '';
+  if (full) full.style.fontSize = '';
+
+  resizeElement(intro, 16, 0.45);
+  resizeElement(rest, 15, 0.4);
+  resizeElement(full, 15, 0.42);
+
+  let guard = 0;
+  while (bodyEl.scrollHeight > bodyWrap.clientHeight && guard < 30) {
+    if (intro) {
+      const s = parseFloat(getComputedStyle(intro).fontSize);
+      if (s > 15) intro.style.fontSize = (s - 0.3) + 'px';
+    }
+    if (rest) {
+      const s = parseFloat(getComputedStyle(rest).fontSize);
+      if (s > 14) rest.style.fontSize = (s - 0.3) + 'px';
+    }
+    if (full) {
+      const s = parseFloat(getComputedStyle(full).fontSize);
+      if (s > 14) full.style.fontSize = (s - 0.3) + 'px';
+    }
+    guard++;
+  }
+}
+
+function render(direction = 0) {
+  const p = points[index];
+  if (p.num === 0) {
+    pointEl.textContent = 'Orientation';
+    counterEl.textContent = 'Read first';
+  } else {
+    pointEl.textContent = 'Point ' + String(p.num).padStart(3, '0');
+    counterEl.textContent = p.num + ' / 100';
+  }
+  titleEl.textContent = p.title;
+  renderBody(p);
+  clinEl.textContent = (p.clin && p.clin.length)
+    ? p.clin.join(' · ')
+    : (p.num === 0 ? 'Orientation card — evidence is carried in the numbered cards that follow.' : 'No CLIN references extracted into this version.');
+  progressFill.style.width = p.num === 0 ? '0%' : (p.num + '%');
+  detailsEl.open = false;
+  setCardTheme(p.num);
+
+  if (direction !== 0) {
+    card.classList.add(direction > 0 ? 'enter-right' : 'enter-left');
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        card.classList.remove('enter-right', 'enter-left');
+      });
+    });
+  }
+  requestAnimationFrame(fitBody);
+}
+
+function go(delta) {
+  const nextIndex = Math.max(0, Math.min(points.length - 1, index + delta));
+  if (nextIndex === index) return;
+  index = nextIndex;
+  render(delta);
+}
+
+function showToast(msg) {
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 1200);
+}
+
+async function shareCurrent() {
+  const p = points[index];
+  const text = p.num === 0
+    ? `${p.title}
+
+${p.body}`
+    : `Point ${p.num} — ${p.title}
+
+${p.body}`;
+  if (navigator.share) {
+    try {
+      await navigator.share({ title: '100 Arguments', text });
+      return;
+    } catch (e) {}
+  }
+  try {
+    await navigator.clipboard.writeText(text);
+    showToast('Argument copied');
+  } catch (e) {
+    showToast('Share unavailable');
+  }
+}
+
+focusBtn.addEventListener('click', () => {
+  document.body.classList.toggle('focus');
+  focusBtn.textContent = document.body.classList.contains('focus') ? '×' : '⛶';
+  setTimeout(fitBody, 50);
+});
+
+shareBtn.addEventListener('click', shareCurrent);
+
+card.addEventListener('pointerdown', (e) => {
+  if (e.target.closest('summary') || e.target.closest('.clin')) return;
+  startX = e.clientX;
+  startY = e.clientY;
+  dragging = true;
+  dragX = 0;
+  card.classList.add('dragging');
+  card.setPointerCapture?.(e.pointerId);
+});
+
+card.addEventListener('pointermove', (e) => {
+  if (!dragging || startX === null) return;
+  const dx = e.clientX - startX;
+  const dy = e.clientY - startY;
+  if (Math.abs(dx) < Math.abs(dy)) return;
+  dragX = dx;
+  const rot = Math.max(-5, Math.min(5, dx / 45));
+  const opacity = Math.max(.68, 1 - Math.abs(dx) / 700);
+  card.style.transform = `translateX(${dx}px) rotate(${rot}deg)`;
+  card.style.opacity = opacity;
+});
+
+function finishSwipe(e) {
+  if (!dragging) return;
+  dragging = false;
+  card.classList.remove('dragging');
+
+  const threshold = Math.min(105, window.innerWidth * .2);
+  const dx = dragX;
+  card.style.transform = '';
+  card.style.opacity = '';
+
+  if (Math.abs(dx) >= threshold) {
+    go(dx < 0 ? 1 : -1);
+  }
+  startX = startY = null;
+  dragX = 0;
+}
+
+card.addEventListener('pointerup', finishSwipe);
+card.addEventListener('pointercancel', finishSwipe);
+
+card.addEventListener('click', (e) => {
+  if (Math.abs(dragX) > 8) return;
+  if (e.target.closest('summary') || e.target.closest('.clin')) return;
+  const rect = card.getBoundingClientRect();
+  const localX = e.clientX - rect.left;
+  if (localX < rect.width * .32) go(-1);
+  else if (localX > rect.width * .68) go(1);
+});
+
+window.addEventListener('keydown', (e) => {
+  if (['ArrowRight','PageDown',' '].includes(e.key)) {
+    e.preventDefault(); go(1);
+  }
+  if (['ArrowLeft','PageUp','Backspace'].includes(e.key)) {
+    e.preventDefault(); go(-1);
+  }
+  if (e.key.toLowerCase() === 'f') {
+    document.body.classList.toggle('focus');
+    focusBtn.textContent = document.body.classList.contains('focus') ? '×' : '⛶';
+    setTimeout(fitBody, 50);
+  }
+});
+
+window.addEventListener('resize', fitBody);
+render();
+</script>
+</body>
+</html>
