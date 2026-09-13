@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8"/>
+<meta content="pandoc" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=yes" name="viewport"/>
+<title>Governing Analytical Framework — Spot On</title>
+<style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+<style>
+  :root {
+    --paper: #f6f3ec;
+    --paper-deep: #ece7dc;
+    --ink: #1f2522;
+    --muted: #667069;
+    --rule: #d6d0c3;
+    --accent: #315d54;
+    --accent-soft: #dfe9e5;
+    --quote: #fffdf8;
+    --max: 47rem;
+    --toc: 19rem;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; background: var(--paper); }
+  body {
+    margin: 0;
+    max-width: none;
+    padding: 0;
+    hyphens: manual;
+    color: var(--ink);
+    background:
+      linear-gradient(90deg, rgba(49,93,84,.035), transparent 22rem),
+      var(--paper);
+    font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    font-size: 18px;
+    line-height: 1.72;
+    text-rendering: optimizeLegibility;
+  }
+  body:before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    height: 4px;
+    width: var(--reading-progress, 0%);
+    background: var(--accent);
+    z-index: 1000;
+  }
+  a { color: var(--accent); text-decoration-thickness: .07em; text-underline-offset: .14em; }
+  a:hover { text-decoration-thickness: .12em; }
+  header#title-block-header,
+  main, nav#TOC { position: relative; }
+  header#title-block-header {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 5.2rem 1.5rem 1.5rem;
+  }
+  header#title-block-header h1 {
+    margin: 0 0 .8rem;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: clamp(2.35rem, 5vw, 4.5rem);
+    line-height: .98;
+    letter-spacing: -.045em;
+    font-weight: 760;
+  }
+  header#title-block-header .subtitle,
+  header#title-block-header .author,
+  header#title-block-header .date {
+    color: var(--muted);
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  #layout {
+    display: grid;
+    grid-template-columns: minmax(14rem, var(--toc)) minmax(0, var(--max));
+    gap: clamp(2rem, 6vw, 5rem);
+    max-width: calc(var(--toc) + var(--max) + 8rem);
+    margin: 0 auto;
+    padding: 0 1.5rem 6rem;
+    align-items: start;
+  }
+  nav#TOC {
+    position: sticky;
+    top: 2rem;
+    max-height: calc(100vh - 4rem);
+    overflow: auto;
+    padding: 1rem 1rem 1.25rem 0;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .83rem;
+    line-height: 1.42;
+    color: var(--muted);
+    scrollbar-width: thin;
+  }
+  nav#TOC:before {
+    content: "Contents";
+    display: block;
+    margin: 0 0 .8rem;
+    color: var(--ink);
+    font-weight: 750;
+    letter-spacing: .02em;
+  }
+  nav#TOC ul { list-style: none; padding-left: 0; margin: 0; }
+  nav#TOC ul ul { padding-left: .85rem; margin: .22rem 0 .45rem; border-left: 1px solid var(--rule); }
+  nav#TOC li { margin: .25rem 0; }
+  nav#TOC a { color: inherit; text-decoration: none; display: block; padding: .16rem 0; }
+  nav#TOC a:hover, nav#TOC a:focus { color: var(--accent); }
+  main { min-width: 0; }
+  main > blockquote:first-child {
+    margin-top: .5rem;
+    padding: 1.25rem 1.4rem;
+    background: var(--quote);
+    border-left: 4px solid var(--accent);
+    font-size: 1.08rem;
+    line-height: 1.65;
+  }
+  h1, h2, h3, h4 {
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #18211e;
+    scroll-margin-top: 1.5rem;
+  }
+  main h1 {
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    line-height: 1.05;
+    letter-spacing: -.035em;
+    margin: 1.25rem 0 .8rem;
+  }
+  main h2 {
+    font-size: clamp(1.42rem, 2.7vw, 2rem);
+    line-height: 1.18;
+    letter-spacing: -.02em;
+    margin: 4.2rem 0 1rem;
+    padding-top: .25rem;
+  }
+  main h2:before {
+    content: "";
+    display: block;
+    width: 3.4rem;
+    height: 3px;
+    background: var(--accent);
+    margin-bottom: 1rem;
+  }
+  main h3 {
+    font-size: 1.13rem;
+    line-height: 1.28;
+    margin: 2.4rem 0 .65rem;
+  }
+  main h4 { font-size: 1rem; margin: 1.8rem 0 .5rem; }
+  p { margin: .9rem 0 1.15rem; }
+  strong { font-weight: 760; }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 3.4rem 0; }
+  blockquote {
+    margin: 1.5rem 0;
+    padding: .25rem 0 .25rem 1.3rem;
+    border-left: 3px solid #9eb3ac;
+    color: #2d3935;
+  }
+  blockquote p { margin: .45rem 0; }
+  ul, ol { padding-left: 1.35rem; }
+  li { margin: .28rem 0; }
+  li::marker { color: var(--accent); }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .88em;
+    background: rgba(49,93,84,.08);
+    padding: .1em .28em;
+    border-radius: .22rem;
+  }
+  pre {
+    overflow: auto;
+    padding: 1rem;
+    background: #202724;
+    color: #f5f2e8;
+    border-radius: .45rem;
+  }
+  pre code { background: transparent; padding: 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.6rem 0 2rem;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: .88rem;
+    line-height: 1.5;
+    background: rgba(255,255,255,.28);
+  }
+  th, td { text-align: left; vertical-align: top; padding: .7rem .75rem; border-bottom: 1px solid var(--rule); }
+  th { font-weight: 720; color: #17201d; background: rgba(49,93,84,.07); }
+  mark { background: #f3e6a8; }
+  .smallcaps { font-variant: small-caps; letter-spacing: .03em; }
+  .skip-link {
+    position: absolute; left: -9999px; top: 0;
+  }
+  .skip-link:focus {
+    left: 1rem; top: 1rem; z-index: 1001; padding: .55rem .8rem;
+    background: #fff; border: 1px solid var(--rule);
+  }
+  @media (max-width: 980px) {
+    body { font-size: 17px; background: var(--paper); }
+    #layout { display: block; max-width: var(--max); }
+    nav#TOC {
+      position: relative;
+      top: auto;
+      max-height: none;
+      margin: 0 0 2.7rem;
+      padding: 1rem 1.1rem;
+      border: 1px solid var(--rule);
+      border-radius: .45rem;
+      background: rgba(255,255,255,.38);
+    }
+    nav#TOC ul ul { display: none; }
+  }
+  @media (max-width: 600px) {
+    body { font-size: 16.5px; line-height: 1.68; }
+    header#title-block-header { padding-top: 3.7rem; }
+    #layout { padding-left: 1rem; padding-right: 1rem; }
+    main h2 { margin-top: 3.5rem; }
+    table { display: block; overflow-x: auto; white-space: normal; }
+  }
+  @media print {
+    :root { --paper: #fff; --ink: #000; }
+    body { background: #fff; font-size: 11pt; line-height: 1.5; }
+    body:before, nav#TOC { display: none; }
+    #layout { display: block; max-width: none; padding: 0; }
+    header#title-block-header, main { max-width: none; padding-left: 0; padding-right: 0; }
+    a { color: #000; text-decoration: none; }
+    h2, h3 { break-after: avoid-page; }
+    blockquote, table { break-inside: avoid; }
+  }
+  </style>
+<meta content="Integrated analytical working note on evidence, explanation, clinical decision-making, patient epistemic status, and institutional correction." name="description"/>
+<style>
+.status-line {
+  display: inline-block;
+  margin: .2rem 0 1.3rem;
+  padding: .34rem .62rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  color: var(--muted);
+  background: rgba(255,255,255,.42);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: .78rem;
+  line-height: 1.2;
+}
+</style>
+<style>
+.repo-role{margin-top:1.2rem;padding:1rem 1.1rem;border:1px solid var(--rule);border-left:4px solid var(--accent);background:rgba(255,255,255,.48);font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.86rem;line-height:1.55;color:#4d5752}.authority-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin:1.6rem 0 2rem}.authority-card{border:1px solid var(--rule);background:rgba(255,255,255,.48);padding:1rem 1rem .9rem;border-radius:.65rem}.authority-card.governing{border-color:#9fb8af;background:var(--accent-soft)}.authority-card h3{margin:.35rem 0 .55rem;font-size:1rem}.authority-card p{font-size:.9rem;line-height:1.55;margin:.4rem 0}.authority-label{font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:var(--muted)}.governing-rules li{margin:.55rem 0}.crosswalk{font-size:.86rem}.crosswalk th:first-child,.crosswalk td:first-child{width:31%}.repo-order{counter-reset:none}.repo-order li{margin:.85rem 0}.governance-callout{margin:2rem 0;padding:1.15rem 1.25rem;border-top:2px solid var(--accent);border-bottom:2px solid var(--accent);background:rgba(255,255,255,.56);font-size:1.02rem}.status-line{max-width:var(--max)}.lead{font-size:1.16rem;line-height:1.65;margin-top:.2rem;margin-bottom:1.4rem}@media(max-width:900px){.authority-grid{grid-template-columns:1fr}}@media print{.repo-role,.authority-card,.governance-callout{background:#fff!important}}
+</style></head>
+<body><a class="skip-link" href="#main-content">Skip to main text</a><header aria-label="Document title" id="title-block-header">
+<h1 class="title">The Governing Analytical Framework</h1>
+<p class="subtitle">Evidence, explanation, patient, decision and institutional correction — the controlling analytical frame for the Spot On repository</p>
+<div class="repo-role"><strong>Repository role:</strong> this document governs the inferential architecture of the legal-facing analysis and the downstream interpretive documents. The original sources and scoped canonical evidential record continue to control factual accuracy and provenance.</div></header><div id="layout"><nav aria-label="Table of contents" id="TOC" role="doc-toc">
+<ul><li><a href="#0-repository-role-legal-alignment-and-document-order" id="toc-0-repository-role-legal-alignment-and-document-order">0. Repository role, legal alignment and document order</a></li><li><a href="#1-the-controlling-question" id="toc-1-the-controlling-question">1. The controlling question</a></li><li><a href="#2-evidential-discipline-what-this-note-may-and-may-not-claim" id="toc-2-evidential-discipline-what-this-note-may-and-may-not-claim">2.
+Evidential discipline: what this note may and may not claim</a></li><li><a href="#3-the-2017-factual-substrate-the-case-did-not-arrive-pre-separated" id="toc-3-the-2017-factual-substrate-the-case-did-not-arrive-pre-separated">3.
+The 2017 factual substrate: the case did not arrive
+pre-separated</a></li><li><a href="#4-sophistication-was-present-and-that-makes-the-problem-harder" id="toc-4-sophistication-was-present-and-that-makes-the-problem-harder">4.
+Sophistication was present, and that makes the problem harder</a></li><li><a href="#5-the-discharge-synthesis-as-a-constitutive-act" id="toc-5-the-discharge-synthesis-as-a-constitutive-act">5. The
+discharge synthesis as a constitutive act</a></li><li><a href="#6-the-introduced-material-what-each-phrase-does-inside-the-frame" id="toc-6-the-introduced-material-what-each-phrase-does-inside-the-frame">6.
+The introduced material: what each phrase does inside the frame</a></li><li><a href="#7-the-protest-from-unresolved-problem-to-pre-closure-error-signal" id="toc-7-the-protest-from-unresolved-problem-to-pre-closure-error-signal">7.
+The Protest: from unresolved problem to pre-closure error
+signal</a></li><li><a href="#8-the-choice-space-was-broad-prevention-did-not-require-solving-the-whole-case" id="toc-8-the-choice-space-was-broad-prevention-did-not-require-solving-the-whole-case">8.
+The choice-space was broad: prevention did not require solving the whole
+case</a></li><li><a href="#9-documentationaction-mismatch-and-epistemic-self-sealing" id="toc-9-documentationaction-mismatch-and-epistemic-self-sealing">9.
+Documentation–action mismatch and epistemic self-sealing</a></li><li><a href="#10-the-patient-and-the-decision-are-one-epistemic-mechanism" id="toc-10-the-patient-and-the-decision-are-one-epistemic-mechanism">10.
+The patient and the decision are one epistemic mechanism</a></li><li><a href="#11-the-later-clinic-notes-are-not-independent-confirmations-they-are-stress-tests-of-the-inherited-model" id="toc-11-the-later-clinic-notes-are-not-independent-confirmations-they-are-stress-tests-of-the-inherited-model">11.
+The later clinic notes are not independent confirmations; they are
+stress tests of the inherited model</a></li><li><a href="#12-local-adaptability-is-not-global-corrigibility" id="toc-12-local-adaptability-is-not-global-corrigibility">12. Local
+adaptability is not global corrigibility</a></li><li><a href="#13-the-2025-complaint-response-is-second-order-defence-of-the-architecture" id="toc-13-the-2025-complaint-response-is-second-order-defence-of-the-architecture">13.
+The 2025 complaint response is second-order defence of the
+architecture</a></li><li><a href="#14-governance-is-the-next-recursive-layer" id="toc-14-governance-is-the-next-recursive-layer">14. Governance is the
+next recursive layer</a></li><li><a href="#15-data-governance-and-historical-stabilisation" id="toc-15-data-governance-and-historical-stabilisation">15. Data
+governance and historical stabilisation</a></li><li><a href="#16-januaryfebruary-2026-the-endpoint-of-the-architecture" id="toc-16-januaryfebruary-2026-the-endpoint-of-the-architecture">16.
+January–February 2026: the endpoint of the architecture</a></li><li><a href="#17-the-record-as-evidential-instrument-versus-advocacy-instrument" id="toc-17-the-record-as-evidential-instrument-versus-advocacy-instrument">17.
+The record as evidential instrument versus advocacy instrument</a></li><li><a href="#18-expertise-can-increase-corrigibility-or-increase-rationalising-power" id="toc-18-expertise-can-increase-corrigibility-or-increase-rationalising-power">18.
+Expertise can increase corrigibility or increase rationalising
+power</a></li><li><a href="#19-the-local-academic-capability-evidence-relevant-but-bounded" id="toc-19-the-local-academic-capability-evidence-relevant-but-bounded">19.
+The local academic capability evidence: relevant, but bounded</a></li><li><a href="#20-what-the-later-biology-can-and-cannot-prove" id="toc-20-what-the-later-biology-can-and-cannot-prove">20. What the
+later biology can and cannot prove</a></li><li><a href="#21-strongest-innocent-explanation-and-strongest-concerning-explanation" id="toc-21-strongest-innocent-explanation-and-strongest-concerning-explanation">21.
+Strongest innocent explanation and strongest concerning
+explanation</a></li><li><a href="#22-what-would-discriminate-between-them" id="toc-22-what-would-discriminate-between-them">22. What would
+discriminate between them</a></li><li><a href="#23-the-hypothesis-must-remain-falsifiable" id="toc-23-the-hypothesis-must-remain-falsifiable">23. The hypothesis
+must remain falsifiable</a></li><li><a href="#24-the-whole-architecture-in-one-sequence" id="toc-24-the-whole-architecture-in-one-sequence">24. The whole
+architecture in one sequence</a></li><li><a href="#25-integrated-controlling-formulation" id="toc-25-integrated-controlling-formulation">25. Integrated
+controlling formulation</a></li><li><a href="#26-questions-that-now-matter-most" id="toc-26-questions-that-now-matter-most">26. Questions that now matter
+most</a></li></ul>
+</nav><main id="main-content">
+<p class="lead"><strong>A functioning clinical system must preserve a route by which materially contrary evidence can change an existing decision.</strong> When an explanation is doing work that permits closure, separation of problems, discharge, or continued reliance on an established model, the explanation cannot legitimately substitute for the evidence that would test it when such testing remains reasonably available, clinically warranted and materially relevant.</p>
+<blockquote>
+<p><strong>An explanation cannot legitimately substitute for the evidence that would test the explanation when testing remains reasonably available, clinically warranted and materially relevant.</strong></p>
+</blockquote>
+<p>This case is governed by that distinction. The July 2017 discharge synthesis is not notable for lack of neurological sophistication. It is extraordinarily sophisticated. The controlling question is what that sophistication was being used to do while a clinically material relationship remained unresolved and, on the Protest premise, had been expressly raised before closure.</p>
+<p>The object of analysis is therefore one integrated system: <strong>evidence, explanation, decision, patient, record, later clinical interpretation and institutional validation</strong>. The original decision and the patient's epistemic status are not separate themes. A decision becomes self-sealing precisely when contrary evidence can be preserved only by changing what the patient, the symptoms, or the later facts are allowed to mean.</p>
+<p>Everything in the repository should be read through this governing structure.</p>
+
+<h2 id="0-repository-role-legal-alignment-and-document-order">0. Repository role, legal alignment and document order</h2>
+<p>This document is intended to sit at the top of the repository's <strong>analytical</strong> hierarchy. It does not outrank the evidence. It governs what the repository is permitted to infer from the evidence, how strongly it may state those inferences, and how the legal-facing and narrative documents should relate to one another.</p>
+<div class="authority-grid">
+<div class="authority-card"><div class="authority-label">Factual authority</div><h3>Originals and canonical record</h3><p>The original source controls over transcription, summary and analysis. The scoped canonical evidential record controls source status, provenance, contemporaneity and evidential independence inside the public repository. If an analytical sentence conflicts with a source, the source wins.</p></div>
+<div class="authority-card governing"><div class="authority-label">Analytical authority</div><h3>This governing framework</h3><p>This document controls the distinction between observation, report, interpretation, hypothesis, later evidence and institutional conclusion; the distinction between reason and rationalisation; and the level of inference that may properly be carried into the legal and ethical documents.</p></div>
+<div class="authority-card"><div class="authority-label">Legal application</div><h3><a href="./legal_shape.html">The Legal Shape of the Case</a></h3><p>The legal-facing document translates the governed analytical propositions into questions of notice, breach, record integrity, professional regulation, institutional governance, causation and proof. It may translate; it may not silently promote a conditional analytical hypothesis into an established fact or legal conclusion.</p></div>
+</div>
+<h3>The controlling relationship to the legal-facing document</h3>
+<p><a href="./legal_shape.html"><strong>The Legal Shape of the Case</strong></a> already identifies the strongest theory as something other than a hindsight allegation that dystonia should simply have been diagnosed. It focuses on an unresolved clinically material relationship, the alleged pre-discharge Protest, the completed specialist synthesis, the separate peripheral/structural future allocated to the feet, the travelling record, later care, governance and proof. This framework now supplies the deeper rule that governs those legal propositions.</p>
+<blockquote><p><strong>A legal argument may defend or criticise a decision by reference to the evidence, reasoning and proportionate inquiry that actually supported it. It may not treat an increasingly sophisticated explanation as though it were itself the missing evidence or clinical act.</strong></p></blockquote>
+<p>Accordingly, the legal-facing document should be read subject to the following rules:</p>
+<ul class="governing-rules">
+<li><strong>Source before theory.</strong> Contemporaneous observation, patient report, clinician interpretation, later external evidence and institutional conclusion must remain distinguishable.</li>
+<li><strong>Notice remains a proof question.</strong> The Protest is analytically central if established, but the retained record presently establishes it as later patient evidence unless and until independent contemporaneous corroboration or provenance evidence proves more.</li>
+<li><strong>Plausibility is not evidential completion.</strong> “Peripheral neuropathy,” alcohol causation, structural feet, Parkinsonism, dystonia and mixed mechanisms can all be medically plausible. The legal question is what evidential and clinical work each proposition was permitted to perform.</li>
+<li><strong>Chronology and conduct distinguish reason from rationalisation.</strong> The same words can be legitimate prospective reasoning or retrospective/self-protective explanation. Draft history, timing, clinical acts and provenance are therefore central.</li>
+<li><strong>Later biology is a stress test, not backwards proof.</strong> Later dystonia and PRKN evidence may test the durability of the 2017 model; it cannot be projected backwards as information the 2017 clinicians necessarily possessed.</li>
+<li><strong>Later notes are dependency-sensitive evidence.</strong> Repetition inside an inherited information architecture is not automatically independent confirmation of the founding allocation.</li>
+<li><strong>The patient and decision must be analysed together.</strong> If the original decision remains fixed by making the patient's contrary evidence increasingly interpretable, the patient's epistemic demotion and the decision's epistemic privilege are one mechanism.</li>
+<li><strong>Negligence remains an expert question.</strong> The framework can identify notice, opportunity, documentation–action mismatch and possible self-sealing. Whether reasonable specialist care in 2017 required different action, and what damage flowed from any breach, requires properly instructed expert and legal analysis.</li>
+<li><strong>Defensive purpose is not presumed.</strong> “Anticipatory defensive documentation,” “self-protective reconstruction” and similar descriptions remain hypotheses whose strength depends on provenance, drafts, communications, clinical action and audit evidence. They are not synonyms for falsification.</li>
+<li><strong>The theory must be able to lose.</strong> Evidence that the separation language substantially pre-dated the Protest, that a targeted relational assessment occurred, that the Protest concerned a materially different proposition, or that the final language followed genuinely new clinical information must be capable of weakening or defeating the stronger theory.</li>
+</ul>
+<h3>Crosswalk: this framework governs the legal document</h3>
+<table class="crosswalk"><thead><tr><th>Legal-facing section</th><th>Governing analytical rule here</th></tr></thead><tbody>
+<tr><td>Legal position / assumed premise</td><td>Evidential discipline; the Protest must remain identified as premise or allegation until its contemporaneous occurrence and transmission are proved.</td></tr>
+<tr><td>Decision fork</td><td>The Protest is a pre-closure error signal only if notice reached the responsible service while meaningful corrective options remained available.</td></tr>
+<tr><td>“Reckless reconstruction”</td><td>The discharge synthesis is analysed first as a constitutive information act. Stronger characterisation depends on whether explanation substituted for materially relevant, reasonably available inquiry and on what chronology/provenance shows.</td></tr>
+<tr><td>Clinical negligence</td><td>No hindsight shortcut. Ask what a competent 2017 specialist should reasonably have done with the observed dystonic-looking lower limb, the painful/structural feet, and any proven notice; expert evidence remains indispensable.</td></tr>
+<tr><td>Record integrity</td><td>A record can distort epistemic status without containing a literally false sentence. Selective preservation, category construction, omission of material dissent and unequal treatment of patient evidence are therefore analytically relevant.</td></tr>
+<tr><td>Hospital / governance</td><td>Later care and review must be tested for recursive validation: founding frame → inherited notes → defence → governance reliance → institutional validation.</td></tr>
+<tr><td>Data protection / historical record</td><td>Historical accuracy of “this was the opinion held” is distinct from the continuing epistemic adequacy of the operative information state. Preservation of history does not itself answer whether supplementation, qualification or reduced reliance was required.</td></tr>
+<tr><td>Proof architecture / what is not proved</td><td>The hypothesis must remain falsifiable. Drafting chronology, Protest proof, audit/version history, actual post-notice clinical acts and independent 2017 expert evidence are the principal discriminators.</td></tr>
+</tbody></table>
+<h3>Repository reading order beneath this framework</h3>
+<p>The following is a <strong>reading and analytical order, not an evidential rank</strong>. Whenever a factual proposition is disputed, return to the source layer regardless of where it appears in the reading sequence.</p>
+<ol class="repo-order">
+<li><strong>01 · Legal application — <a href="./legal_shape.html">The Legal Shape of the Case</a>.</strong> The public legal-facing translation of the governed theory. It should inherit this document's qualifications, proof boundaries and anti-hindsight rules.</li>
+<li><strong>02 · Argument map — <a href="./100_arguments_shareable_story_deck_coloured.html">100 Arguments</a>.</strong> A broad inventory of documentary, clinical and longitudinal propositions. It is a map of arguable points, not a hierarchy of established findings.</li>
+<li><strong>03 · Ethical narrative — <a href="./JR_The_Unresolved_Relationship_Ethics_Narrative_EYE_OF_STORM.html">The Unresolved Relationship</a>.</strong> The continuous human and institutional narrative. Its ethical force is governed by the same distinctions between established fact, assumed Protest, inference and later evidence.</li>
+<li><strong>04 · Forensic close reading — <a href="./complexity.html">The Construction of Complexity</a> / <a href="./complexity.md">Markdown</a>.</strong> The close analysis of how the 2017 synthesis constructs peripheral separation, inferential density and documentary complexity. Its phrase-level observations feed this framework; this framework determines their larger institutional meaning.</li>
+<li><strong>05 · Public record interface — <a href="./medical_record.html">The Clinical Record</a>.</strong> The readable/searchable route into the retained clinical and governance sequence. It is upstream of interpretation and should be used to test every material factual claim.</li>
+<li><strong>06 · Canonical evidential layer — <a href="./ETHICS_CANONICAL_EVIDENTIAL_RECORD_WORKING.md">Scoped Canonical Evidential Record</a> and <a href="./record/record_part_01.md">record_part_01.md</a>.</strong> These preserve source status and the retained evidential corpus. They remain subordinate to the underlying originals where the canonical record says the originals control.</li>
+</ol>
+<div class="governance-callout"><strong>Repository rule in one sentence:</strong> the evidence controls the facts; this framework controls the inferences; the legal document applies those inferences to law; the remaining documents illuminate, narrate and test the same governed object without silently changing its evidential status.</div>
+<hr/>
+<h2 id="1-the-controlling-question">1. The controlling question</h2>
+<p>A functioning clinical system must preserve some route by which
+contrary facts can change an existing model.</p>
+<p>The relevant contrast is between two rules:</p>
+<blockquote>
+<p><strong>When a material concern is raised, investigate it
+proportionately, then document why the resulting decision is
+reasonable.</strong></p>
+</blockquote>
+<p>and:</p>
+<blockquote>
+<p><strong>When a material concern is raised, construct a sufficiently
+plausible account under which the existing decision remains
+reasonable.</strong></p>
+</blockquote>
+<p>The first rule is compatible with learning. The second is not.</p>
+<p>This distinction does not require every conceivable test to be
+performed. Medicine is full of uncertainty, proportionality and
+reasonable decisions not to investigate further. The problem arises when
+explanatory propositions are allowed to acquire the evidential force of
+inquiry merely because they are plausible.</p>
+<p>A sentence such as:</p>
+<blockquote>
+<p>“The burning feet could represent an independent peripheral
+neuropathy.”</p>
+</blockquote>
+<p>can be an excellent clinical hypothesis if it generates or follows a
+proportionate process capable of testing, limiting or preserving
+uncertainty around it.</p>
+<p>The same sentence can function as rationalisation if it appears or
+gains force after the existing disposition has been challenged, is used
+to explain why that challenge need not alter the disposition, and is not
+exposed to the reasonably available evidence capable of distinguishing
+it from alternatives.</p>
+<p>The words alone cannot distinguish a <strong>reason</strong> from a
+<strong>rationalisation</strong>.</p>
+<p><strong>Chronology and conduct do.</strong></p>
+<p>The question for this case is therefore:</p>
+<blockquote>
+<p><strong>Was expertise being used to reduce uncertainty about reality,
+or to reduce the vulnerability of an existing decision to contrary
+reality?</strong></p>
+</blockquote>
+<p>That is the spine connecting the 2017 discharge note, the later
+clinic notes, the complaint response, the governance process, and the
+changing epistemic status of the patient.</p>
+<hr/>
+<h2 id="2-evidential-discipline-what-this-note-may-and-may-not-claim">2.
+Evidential discipline: what this note may and may not claim</h2>
+<p>The public repository contains a <strong>scoped canonical evidential
+record</strong>, not the complete master corpus. The canonical selection
+retains 32 documentary objects from a larger 83-document corpus. The
+complete corpus is said to exist elsewhere but is not all available in
+the public repository.</p>
+<p>Accordingly, negative propositions must remain documentary negatives
+unless independently proved.</p>
+<p>The analysis should distinguish four categories:</p>
+<ol type="1">
+<li><strong>Directly demonstrated in the available contemporaneous
+record.</strong></li>
+<li><strong>Later evidence capable of testing the earlier model, but not
+of becoming knowledge available in 2017.</strong></li>
+<li><strong>Analytical inference about the function or architecture of
+the record.</strong></li>
+<li><strong>Allegation or assumed premise requiring separate
+proof.</strong></li>
+</ol>
+<p>Several rules follow.</p>
+<ul>
+<li>“Not visible in the retained record” is not equivalent to “never
+happened.”</li>
+<li>The later PRKN result cannot be projected backwards as proof of what
+clinicians should have known in July 2017.</li>
+<li>The later patient account of the Protest is evidence that the
+allegation was made; it is not the same thing as contemporaneous
+corroboration of the event.</li>
+<li>“Burning first becomes visible in the disclosed record within the
+later synthesis” is supportable; “burning was invented” is not.</li>
+<li>The peripheral-neuropathy possibility was tentative, not a proven
+diagnosis.</li>
+<li>Immediate levodopa is not an appropriate hindsight “missing obvious
+test” theory; the actual 2017 record documents a deliberate strategy of
+caution in a very young patient.</li>
+<li>Podiatry referral was real and appropriate. A destination, however,
+is not necessarily an explanation of the relationship.</li>
+<li>A public summary assertion that Podiatry recorded "No neuropathy"
+should not presently carry primary evidential weight: in the retained
+canonical referral form the visible "No neuropathy" box is described as
+not ticked. A later source may exist in the wider corpus, but it should
+be located before the proposition is relied upon.</li>
+</ul>
+<p>The inquiry must not become self-sealing in the opposite direction.
+The hypothesis developed here must itself remain falsifiable by
+provenance, expert evidence and contrary source material.</p>
+<hr/>
+<h2 id="3-the-2017-factual-substrate-the-case-did-not-arrive-pre-separated">3.
+The 2017 factual substrate: the case did not arrive pre-separated</h2>
+<p>The incoming problem was integrated.</p>
+<p>Before specialist admission, the record joins:</p>
+<ul>
+<li>bilateral foot pain;</li>
+<li>abnormal gait;</li>
+<li>marked mallet toes, calluses and pressure areas;</li>
+<li>poor foot condition;</li>
+<li>“muscle tension”;</li>
+<li>increased tone in both legs;</li>
+<li>brisk reflexes;</li>
+<li>toe clawing;</li>
+<li>worsening dexterity;</li>
+<li>initiation difficulty;</li>
+<li>deteriorating work function;</li>
+<li>and possible Parkinsonism or another neurological disorder.</li>
+</ul>
+<p>The June urgent referral therefore did not present Neurology with a
+cleanly separated case called “Parkinsonism plus unrelated feet.” It
+presented an <strong>integrated feet–gait–tone–movement
+problem</strong>.</p>
+<p>Podiatry was already involved. On 6 July the GP recorded that
+Podiatry would mark the case as a priority “as Parkinson's.” That
+matters because it shows that podiatric management and neurological
+relevance were not inherently mutually exclusive. Structural care could
+coexist with neurological ownership of the relationship.</p>
+<p>The specialist history also contained genuine evidence favouring
+distinction. The patient had longstanding corns, calluses and fallen
+arches, had received foot treatment since about 2009–10, and reported
+that after leaving bar work the <strong>foot pain</strong> reduced
+substantially, to a degree “out of the picture,” while leg tension
+continued and corns/calluses remained. He therefore came to recognise
+that foot pain and leg tension were “not the same problem.”</p>
+<p>That is important evidence. Separation was not fabricated from
+nothing.</p>
+<p>But the correct inference is narrower:</p>
+<blockquote>
+<p><strong>Phenomenological distinction had evidence. Biological
+independence remained an inference.</strong></p>
+</blockquote>
+<p>At the same time, Neurology directly observed the competing
+neurological relationship. The gait was described as “strikingly
+abnormal.” The apparent footdrop was “somewhat suggestive of a dystonic
+posture — NOT FOOT DROP.” The left lower limb “kicks out like a foot
+drop.” Severe rigidity and bradykinesia were present. Pes planus and
+hammertoes were documented in the same examination.</p>
+<p>So by the founding admission the service held, in the same
+information state:</p>
+<p><strong>real structural feet + real pain history + real
+phenomenological distinction + real severe Parkinsonism + real
+dystonic-looking lower-limb movement.</strong></p>
+<p>The unresolved object was visible:</p>
+<blockquote>
+<p><strong>What is the relationship between the painful / structurally
+abnormal feet and the dystonic-looking lower limb?</strong></p>
+</blockquote>
+<hr/>
+<h2 id="4-sophistication-was-present-and-that-makes-the-problem-harder">4.
+Sophistication was present, and that makes the problem harder</h2>
+<p>The admission was not intellectually thin.</p>
+<p>The discharge synthesis considered:</p>
+<ul>
+<li>very-young-onset Parkinsonism;</li>
+<li>atypical phenotype;</li>
+<li>recessive genetics;</li>
+<li>PRKN/PARK2;</li>
+<li>PARK6;</li>
+<li>PARK7;</li>
+<li>PARK9, expressly linked to “the neuropathy question”;</li>
+<li>other Parkinson-plus and metabolic possibilities;</li>
+<li>imaging;</li>
+<li>prognosis;</li>
+<li>treatment sequence;</li>
+<li>levodopa sensitivity and dyskinesia risk;</li>
+<li>future whole-exome or whole-genome analysis;</li>
+<li>and the limitations of the author's own expertise, including the
+express statement: “I am not a movement disorders neurologist.”</li>
+</ul>
+<p>There was a Neurology Complex Case meeting. Senior colleagues were
+involved. External genetic advice was sought. The note was intended to
+consolidate discussions, assist “debriefing” and set out a clear
+plan.</p>
+<p>Therefore the mature question is not:</p>
+<blockquote>
+<p>“Why was sophisticated neurological thought unavailable?”</p>
+</blockquote>
+<p>It is:</p>
+<blockquote>
+<p><strong>Why was extraordinary neurological sophistication available
+for disease subtype, genetics, prognosis and treatment, yet the concrete
+relationship between painful structural feet and a directly observed
+dystonic-looking limb did not receive equivalent relational
+development?</strong></p>
+</blockquote>
+<p>Even that question is still incomplete, because it treats
+sophistication as neutral background.</p>
+<p>The harder possibility is that the sophisticated synthesis was itself
+<strong>the means by which the unresolved relationship acquired a
+separate future</strong>.</p>
+<p>The discharge note must therefore be read not merely as a description
+of thought but as an <strong>act of organisation</strong>.</p>
+<hr/>
+<h2 id="5-the-discharge-synthesis-as-a-constitutive-act">5. The
+discharge synthesis as a constitutive act</h2>
+<p>Before synthesis, the record contains observations that can still be
+organised in several ways.</p>
+<p>The final synthesis gives those observations an architecture.</p>
+<p>One branch becomes neurologically elaborate:</p>
+<p><strong>Parkinsonism → very young onset → atypical phenotype →
+recessive inheritance → PRKN/PARK2 → PARK6/PARK7/PARK9 → imaging →
+prognosis → treatment strategy.</strong></p>
+<p>The other becomes:</p>
+<p><strong>corns/calluses + burning + foot pain → “leg symptoms” → may
+be completely separate → perhaps secondary peripheral neuropathy →
+perhaps alcohol-related → not clear / improved → Podiatry.</strong></p>
+<p>The important analytical point is not that every element in the
+second branch is false. Several are medically plausible. The important
+point is what the branch <strong>does</strong>.</p>
+<p>It gives the foot territory an explanatory and managerial route that
+no longer requires the feet to interrogate the Parkinsonian/dystonic
+model.</p>
+<p>The unresolved bridge:</p>
+<blockquote>
+<p><strong>painful/structural feet ↔︎ dystonic-looking lower
+limb</strong></p>
+</blockquote>
+<p>receives much less development than either branch on its own.</p>
+<p>This is the physically created frame.</p>
+<p>The note does not merely contain facts. It assigns facts to
+categories, categories to causal possibilities, and causal possibilities
+to future owners.</p>
+<p>That is why the discharge summary is the <strong>founding epistemic
+instrument</strong> of the later case.</p>
+<p>It determines not only what later readers will know, but what kinds
+of questions later facts will be permitted to ask.</p>
+<hr/>
+<h2 id="6-the-introduced-material-what-each-phrase-does-inside-the-frame">6.
+The introduced material: what each phrase does inside the frame</h2>
+<p>Several phrases should be read together because their force lies in
+sequence and function.</p>
+<h3 id="out-of-the-picture">“Out of the picture”</h3>
+<p>The historical fact is that foot <strong>pain</strong> reduced after
+leaving bar work, while leg tension continued and corns/calluses
+remained.</p>
+<p>That supports phenomenological difference.</p>
+<p>Inside the later architecture, however, the phrase can also reduce
+the contemporary evidential weight of the foot problem. A historical
+reduction in pain can begin to function as support for separation.</p>
+<h3 id="burning">“Burning”</h3>
+<p>“Burning” first becomes visible in the disclosed record in the
+compact neuropathy synthesis. It may well have been genuinely reported;
+the scoped record cannot establish otherwise.</p>
+<p>Its function is nevertheless important:</p>
+<p><strong>burning → neuropathic quality → peripheral neuropathy →
+possible alcohol-related cause.</strong></p>
+<p>A sensory descriptor helps open a respectable peripheral explanatory
+route.</p>
+<h3 id="leg-symptoms-including-corns-and-callouses-and-burning">“Leg
+symptoms including corns and callouses and burning”</h3>
+<p>This grouping matters. Corns and calluses are structural/cutaneous
+findings. Burning is a sensory descriptor. “Leg symptoms” is a broader
+anatomical category.</p>
+<p>The synthesis turns these heterogeneous observations into a single
+object capable of travelling into a peripheral explanation.</p>
+<h3 id="may-have-been-completely-separate--perhaps-a-secondary-peripheral-neuropathy--alcohol--not-clear-as-this-has-improved">“May
+have been completely separate” / “perhaps a secondary peripheral
+neuropathy” / alcohol / “not clear as this has improved”</h3>
+<p>The language is tentative. That must be preserved.</p>
+<p>But tentativeness does not mean lack of organising force. A tentative
+hypothesis can still structure ownership, follow-up and future
+interpretation.</p>
+<p>The question is whether the hypothesis remained visibly provisional
+<strong>in the sense of having an exit condition</strong>, or became
+operationally sufficient for separation without the relationship being
+tested.</p>
+<h3 id="he-has-in-his-own-mind--markedly-divorced">“He has in his own
+mind — markedly divorced…”</h3>
+<p>This may be one of the most consequential sentences in the
+document.</p>
+<p>The patient is used as evidence supporting the separation of tension
+from corns, calluses and foot pain.</p>
+<p>If the Protest is proved, the same patient also supplied contrary
+evidence: the unresolved bilateral foot problem remained important
+enough that he objected to closure.</p>
+<p>The potential asymmetry is therefore not merely omission of a
+complaint.</p>
+<p>It is:</p>
+<blockquote>
+<p><strong>the patient's confirmatory distinctions are preserved as
+evidence for the frame, while the patient's disconfirmatory challenge to
+the frame does not acquire equivalent travelling force.</strong></p>
+</blockquote>
+<p>That is a change in the <strong>epistemic status of the
+patient</strong>.</p>
+<h3 id="park9-the-neuropathy-question">“PARK9 (the neuropathy
+question)”</h3>
+<p>This phrase matters because neuropathy is not merely an incidental
+non-neurological aside. It enters the high-level neurological/genetic
+architecture itself.</p>
+<p>The note is sophisticated enough to conceptualise neuropathy as part
+of a monogenic Parkinsonism question, while the concrete feet–dystonia
+relationship remains comparatively underdeveloped.</p>
+<h3 id="i-am-not-a-movement-disorders-neurologist">“I am not a movement
+disorders neurologist”</h3>
+<p>This statement is candid and can be read innocently as appropriate
+recognition of limits.</p>
+<p>But once a very young patient has severe Parkinsonism,
+dystonic-looking lower-limb movement, structural foot pathology and an
+unresolved relational question, acknowledgement of a specialist
+limitation also raises a specific epistemic issue:</p>
+<blockquote>
+<p><strong>Did recognition of the limit generate a proportionate route
+for the unresolved relationship to encounter the expertise capable of
+testing it?</strong></p>
+</blockquote>
+<p>The point is not that referral was automatically required. It is that
+disclosure of limitation without a corresponding exit route can become
+another part of a document that explains uncertainty without necessarily
+resolving or preserving it.</p>
+<hr/>
+<h2 id="7-the-protest-from-unresolved-problem-to-pre-closure-error-signal">7.
+The Protest: from unresolved problem to pre-closure error signal</h2>
+<p>The Protest is the largest evidential hinge and must remain
+conditionally framed.</p>
+<p>The retained canonical record does not contemporaneously corroborate
+the bedside event. The later patient account alleges that during the
+10–11 July 2017 teaching encounter, while still an inpatient, he said
+that the disabling bilateral foot problem had not been addressed, asked
+for the supervising neurologist, and used the “full NCT / bald tires”
+analogy.</p>
+<p>If the Protest is not proved, the case still contains:</p>
+<ul>
+<li>an integrated incoming problem;</li>
+<li>structural foot disease;</li>
+<li>directly observed dystonic-looking lower-limb movement;</li>
+<li>a plausible peripheral branch;</li>
+<li>and a travelling synthesis that does not visibly develop their
+relationship.</li>
+</ul>
+<p>That supports an <strong>incomplete relational investigation /
+documentary asymmetry</strong> thesis.</p>
+<p>If the Protest is proved, the character of the case changes
+materially.</p>
+<p>The patient did not merely discover years later that the account was
+incomplete. He identified the incompleteness <strong>before closure,
+while the care episode and authoritative synthesis were still
+open</strong>. The documentary openness is independently visible: the 13
+July 2017 DaTscan, performed after physical discharge, was incorporated
+into the still-open discharge product by addendum before finalisation.
+That does not prove further bedside examination remained possible after
+discharge; it does prove that the authoritative information state
+remained capable of augmentation.</p>
+<p>The Protest then functions as a <strong>pre-closure error
+signal</strong>:</p>
+<blockquote>
+<p><strong>You have not accounted for this central problem. If you
+complete the episode as though you have, the incompleteness itself will
+become part of the care pathway.</strong></p>
+</blockquote>
+<p>That is what gives meaning to the patient's phrase <strong>“prior
+negligence setup.”</strong></p>
+<p>It should not be treated as a legal conclusion. It identifies a
+hypothesis about timing and function:</p>
+<blockquote>
+<p><strong>Once a potentially negligent incompleteness had been
+expressly identified before closure, did the system use its remaining
+opportunity principally to investigate and preserve that unresolved
+question, or principally to construct an account under which the
+existing disposition remained defensible?</strong></p>
+</blockquote>
+<p>This is earlier than ordinary post-event defensiveness. On the
+hypothesis, the future complaint exists in substance before the patient
+has even left the episode of care.</p>
+<p>The clinical problem is:</p>
+<blockquote>
+<p><strong>What is the relationship between these feet and this abnormal
+movement?</strong></p>
+</blockquote>
+<p>The institutional problem, once the inadequacy of the disposition is
+challenged, may become:</p>
+<blockquote>
+<p><strong>Can the intended disposition remain reasonable despite the
+challenge?</strong></p>
+</blockquote>
+<p>Those two problems can recruit the same neurological sophistication
+for different purposes.</p>
+<p>That is the central meaning of the possible <strong>negative
+employment of expertise</strong>.</p>
+<hr/>
+<h2 id="8-the-choice-space-was-broad-prevention-did-not-require-solving-the-whole-case">8.
+The choice-space was broad: prevention did not require solving the whole
+case</h2>
+<p>The Protest, if proved, did not create a binary between restarting
+the entire admission and ignoring the concern.</p>
+<p>The middle was large.</p>
+<p>Possible proportionate responses included:</p>
+<ul>
+<li>focused bedside re-examination;</li>
+<li>history reconstruction from the feet outward;</li>
+<li>explicit phenomenological mapping of pain, burning, pressure
+lesions, deformity, toe clawing, rigidity, dystonic posture and
+subjective tension;</li>
+<li>a mixed-mechanism formulation in which structural pathology and
+neurological loading/posture could coexist;</li>
+<li>movement-disorders or colleague review focused specifically on the
+lower-limb/foot phenomenology;</li>
+<li>a defined neurological question for Podiatry;</li>
+<li>explicit preservation of “independent vs interacting remains
+unresolved”;</li>
+<li>documentation of the patient's disagreement;</li>
+<li>a defined neurological return loop after imaging or treatment;</li>
+<li>or proceeding with discharge while recording why no further
+inpatient inquiry was proportionate and what finding would trigger
+reconsideration.</li>
+</ul>
+<p>The record already shows general consultation and general follow-up.
+Therefore the criticism cannot fairly be “there was no consultation” or
+“there was no return.”</p>
+<p>The narrower question is:</p>
+<blockquote>
+<p><strong>Was there a specifically owned return loop for the unresolved
+relationship?</strong></p>
+</blockquote>
+<p>Likewise, the missing opportunity should not be reduced to immediate
+levodopa. The actual record documents legitimate caution about early
+dopaminergic treatment in a very young patient, and the local 2017
+academic literature supports the use of anticholinergic treatment such
+as procyclidine in comparable recessive Parkinsonism scenarios.</p>
+<p>The relevant missing middle is therefore about <strong>inquiry,
+integration, ownership, preservation of uncertainty and exit
+conditions</strong>.</p>
+<p>The proportionality formulation is:</p>
+<blockquote>
+<p><strong>The issue is not whether Neurology had to solve the feet
+before discharge. It is whether the authority and durability of the
+disposition became greater than the relational work visibly supporting
+it.</strong></p>
+</blockquote>
+<hr/>
+<h2 id="9-documentationaction-mismatch-and-epistemic-self-sealing">9.
+Documentation–action mismatch and epistemic self-sealing</h2>
+<p>The central institutional danger is a <strong>documentation–action
+mismatch</strong>.</p>
+<p>Compare:</p>
+<p><strong>material anomaly → proportionate inquiry → decision →
+documentation</strong></p>
+<p>with:</p>
+<p><strong>material anomaly → existing decision → challenge →
+increasingly sophisticated explanation → unchanged
+decision.</strong></p>
+<p>In the second sequence, explanation may begin to perform work that
+investigation would ordinarily perform.</p>
+<p>That is where a model can become <strong>epistemically
+self-sealing</strong>.</p>
+<p>A self-sealing model does not need to deny contrary facts. It can
+absorb them.</p>
+<ul>
+<li>Structural pain? Separate foot disease.</li>
+<li>Burning? Neuropathy.</li>
+<li>Alcohol history? Possible etiology.</li>
+<li>Footdrop appearance with normal power? Parkinsonian/dystonic
+phenomenon.</li>
+<li>Later OFF cramping? OFF dystonia.</li>
+<li>Pain and shuffling responding to dopaminergic timing? OFF-related
+symptom amplification.</li>
+<li>Profound relief with Sinemet CR? Levodopa may reduce pain experience
+whatever its cause.</li>
+<li>Later dystonia diagnosis? Update present care, but prior governance
+need not be reopened.</li>
+</ul>
+<p>Each individual proposition may be plausible.</p>
+<p>The problem is the role they collectively play if <strong>no
+observation is allowed to make the founding partition lose</strong>.</p>
+<p>The deepest falsifiability question is therefore:</p>
+<blockquote>
+<p><strong>What fact, had it occurred, would have required the original
+feet–movement relationship to be reconstructed?</strong></p>
+</blockquote>
+<p>If every possible fact can be incorporated without changing the
+epistemic status of the founding decision, the model has ceased to
+function as a genuinely testable clinical model.</p>
+<hr/>
+<h2 id="10-the-patient-and-the-decision-are-one-epistemic-mechanism">10.
+The patient and the decision are one epistemic mechanism</h2>
+<p>The epistemic privilege of the original decision and the epistemic
+downgrading of the patient are not two separate consequences.</p>
+<p>They are the same operation.</p>
+<blockquote>
+<p><strong>The system preserves the epistemic status of the original
+decision by reducing the epistemic force of the patient as a source of
+disconfirming knowledge.</strong></p>
+</blockquote>
+<p>Once the founding frame exists, contradictory information has to move
+somewhere. If the decision is not permitted to move, the contradictory
+element must become flexible instead.</p>
+<p>In this case, the most flexible element is the patient.</p>
+<p>His symptoms can be reclassified.</p>
+<p>His chronology can be redescribed.</p>
+<p>His phenomenological distinctions can be recruited when they support
+separation.</p>
+<p>His objection can be omitted, narrowed, mediated or treated as a
+disagreement about interpretation.</p>
+<p>His later treatment response can be explained without reconstructing
+the original relationship.</p>
+<p>His later diagnosis can change the present without changing the
+historical institutional conclusion.</p>
+<p>The structure is therefore:</p>
+<blockquote>
+<p><strong>decision fixed; patient made interpretable.</strong></p>
+</blockquote>
+<p>A patient does not need to be medically correct to have epistemic
+standing. The patient possesses evidence clinicians do not possess:
+chronology, pain, functional change, previous baseline, treatment-state
+experience, and the meaning of his own distinctions.</p>
+<p>In a functioning clinical system, that evidence should have two
+roles:</p>
+<ol type="1">
+<li>populate the clinical history;</li>
+<li>retain some capacity to challenge the clinician's interpretation of
+that history.</li>
+</ol>
+<p>In a self-sealing system, the first role survives while the second
+weakens.</p>
+<p>The patient becomes:</p>
+<blockquote>
+<p><strong>credible when confirmatory; corrigible when
+contradictory.</strong></p>
+</blockquote>
+<p>That is why selective preservation is not merely a record-keeping
+issue. It is one of the mechanisms by which a decision can become
+resistant to correction.</p>
+<p>The strongest paired formulations are:</p>
+<blockquote>
+<p><strong>The original decision becomes authoritative to the extent
+that the patient becomes interpretable.</strong></p>
+</blockquote>
+<p>and:</p>
+<blockquote>
+<p><strong>The system could change almost everything except the
+epistemic status of the original decision because it could reinterpret
+almost everything about the patient instead.</strong></p>
+</blockquote>
+<p>This is not a second problem alongside incorrigibility. It is the
+mechanism of incorrigibility.</p>
+<hr/>
+<h2 id="11-the-later-clinic-notes-are-not-independent-confirmations-they-are-stress-tests-of-the-inherited-model">11.
+The later clinic notes are not independent confirmations; they are
+stress tests of the inherited model</h2>
+<p>Once the 2017 synthesis travels, later clinicians do not encounter
+the raw 2017 presentation. They encounter:</p>
+<p><strong>patient + accumulated record + inherited
+categories.</strong></p>
+<p>Therefore repetition in later notes cannot automatically be counted
+as independent corroboration of the founding partition.</p>
+<p>The later record should instead be read as a sequence of
+<strong>stress tests</strong>:</p>
+<blockquote>
+<p><strong>What happens when new reality presses against the original
+architecture?</strong></p>
+</blockquote>
+<h3 id="2018-treatment-state-evidence-touches-the-foot-territory">2018:
+treatment-state evidence touches the foot territory</h3>
+<p>When procyclidine was withdrawn for about two weeks, one of the first
+rapidly changing problems was the return of the outside-left-foot corn
+problem; the patient also became more “shifty” and “unrelaxed,” and
+procyclidine was restarted.</p>
+<p>This does not prove the corn was caused by dystonia. It does create
+dynamic evidence in the disputed territory: changing movement-disorder
+treatment changed what happened in or around the foot problem.</p>
+<p>The founding relationship was not visibly reconstructed.</p>
+<h3 id="2019-mechanism-differentiation-is-demonstrably-possible">2019:
+mechanism differentiation is demonstrably possible</h3>
+<p>The neurologist described “dystonia type elements” and mild akathesic
+restlessness and, in another problem, carefully distinguished a
+shoulder/triceps syndrome as probably not primarily Parkinsonian while
+acknowledging that Parkinsonism could magnify pain.</p>
+<p>This is relevant because it shows the clinician could distinguish
+mechanisms and mixed causation when he chose to do so. It does not
+itself answer the foot relationship.</p>
+<h3 id="2020-apparent-footdrop-is-explicitly-reclassified-as-neurological">2020:
+apparent footdrop is explicitly reclassified as neurological</h3>
+<p>The clinician reassessed a left lower-limb “throw” that looked like
+footdrop and concluded it was “actually parkinsonian” because
+dorsiflexion, plantarflexion, inversion and eversion power were
+normal.</p>
+<p>This is an important local correction. A phenomenon in precisely the
+disputed territory is reclassified neurologically.</p>
+<p>But the correction behaves like a <strong>patch</strong>, not a
+reconstruction of the founding model. The note does not visibly ask what
+this means for the earlier separation between neurological movement and
+painful/structural feet.</p>
+<h3 id="2022-foot-pain-remains-in-the-longitudinal-record">2022: foot
+pain remains in the longitudinal record</h3>
+<p>The feet took 20–25 minutes to “warm up” in the mornings; they were
+sore; corns/calluses and a “coronal” pain were described; the patient
+wondered whether the pain was neuralgic.</p>
+<p>Again the foot territory remains active, but the founding
+relationship is not reconstructed.</p>
+<h3 id="2023-the-closest-apparent-reopening-becomes-assimilation">2023:
+the closest apparent reopening becomes assimilation</h3>
+<p>The patient “ground to an absolute halt with foot pain in both feet,”
+had severe walking difficulty and cramping in the left lower limb.</p>
+<p>The clinician explicitly asked whether the cramping was Parkinsonian
+dystonia and said that, if dystonic, it was “clearly more likely an OFF
+dystonia.” The clinician also asked whether much of the inability to
+walk was due to insufficient levodopa, and the patient reported Stalevo
+gave “pep in step” and helped “for pain.” The Parkinson's nurse later
+assessed leg pain and shuffling as OFF related.</p>
+<p>Most importantly, the clinician recognised a
+<strong>misalignment</strong>: he might appear to think everything was
+explainable by Parkinson's, while the patient had reasonable concerns
+that much related to the feet as a separate problem.</p>
+<p>This is almost the founding relational question returning
+explicitly.</p>
+<p>Yet the model is not visibly reconstructed. Instead, the new evidence
+is accommodated:</p>
+<ul>
+<li>OFF dystonia can exist;</li>
+<li>OFF walking impairment can exist;</li>
+<li>Parkinsonism can magnify pain;</li>
+<li>a separate foot problem can still exist;</li>
+<li>Fabry disease can be tested as a Parkinsonism/peripheral-neuropathy
+overlap possibility.</li>
+</ul>
+<p>This is better described as:</p>
+<blockquote>
+<p><strong>assimilation of counter-evidence without correction of the
+founding partition.</strong></p>
+</blockquote>
+<h3 id="2024-further-accommodation">2024: further accommodation</h3>
+<p>Pregabalin substantially improves foot pain; toe curling remains;
+Fabry and beta-hexosaminidase testing are normal; concern about
+alcohol-related neuropathy remains; thiamine is recommended;
+dopaminergic treatment is balanced against dyskinesia.</p>
+<p>Again the clinical system adapts locally.</p>
+<h3 id="march-2025-potentially-falsifying-treatment-response-is-absorbed">March
+2025: potentially falsifying treatment response is absorbed</h3>
+<p>The feet are now a central concern: the first 150 steps are described
+as “torture,” and the patient says relief comes when Parkinson
+medication hits the system.</p>
+<p>The clinician allows that Sinemet commonly makes pain feel better but
+argues that pain is not necessarily a direct Parkinsonian phenomenon;
+painful dystonia exists, but the described pain may still have a
+separate cause. Sinemet CR is added and the later complaint response
+describes <strong>profound relief</strong>.</p>
+<p>That profound dopaminergic response could reopen the original
+relationship. It could support dystonia, non-motor OFF pain, mixed
+mechanisms, or another Parkinson-related explanation. It does not prove
+any one of them.</p>
+<p>What matters is that the founding architecture can absorb even
+this:</p>
+<blockquote>
+<p><strong>Sinemet may reduce the experience of pain whatever its
+underlying cause.</strong></p>
+</blockquote>
+<p>That proposition may be medically reasonable. Functionally, however,
+it permits dramatic response in the disputed foot territory to coexist
+with continued separation.</p>
+<p>By this point the critical question is no longer whether the model
+has been locally updated. It clearly has.</p>
+<p>The question is:</p>
+<blockquote>
+<p><strong>What evidence is actually capable of forcing the original
+partition to be reconsidered?</strong></p>
+</blockquote>
+<hr/>
+<h2 id="12-local-adaptability-is-not-global-corrigibility">12. Local
+adaptability is not global corrigibility</h2>
+<p>The longitudinal record demonstrates substantial local
+adaptability:</p>
+<ul>
+<li>medication changes;</li>
+<li>treatment trials;</li>
+<li>local phenomenological reclassification;</li>
+<li>recognition of OFF dystonia;</li>
+<li>recognition of OFF-related shuffling/pain;</li>
+<li>new metabolic/genetic tests;</li>
+<li>acceptance of profound Sinemet response;</li>
+<li>and later external diagnostic/genetic clarification.</li>
+</ul>
+<p>But the relevant unit of analysis is not whether <em>anything</em>
+could change.</p>
+<p>It is whether the <strong>founding feet–movement partition</strong>
+could lose its epistemic status.</p>
+<p>Through February 2026, the retained record shows no clear internal
+Galway reconstruction of that founding relationship.</p>
+<p>The better vocabulary is therefore:</p>
+<blockquote>
+<p><strong>local adaptability under global incorrigibility;</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>assimilation without correction;</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>clinical plasticity without epistemic
+correction.</strong></p>
+</blockquote>
+<p>The concise formulation is:</p>
+<blockquote>
+<p><strong>The system could change almost everything except the
+epistemic status of the original decision.</strong></p>
+</blockquote>
+<p>And because the patient and decision are one mechanism:</p>
+<blockquote>
+<p><strong>It could do so because almost everything about the patient
+remained available for reinterpretation.</strong></p>
+</blockquote>
+<hr/>
+<h2 id="13-the-2025-complaint-response-is-second-order-defence-of-the-architecture">13.
+The 2025 complaint response is second-order defence of the
+architecture</h2>
+<p>By March 2025, the issue is no longer merely clinical management. The
+patient explicitly alleges anchoring, alcohol-related neuropathy framing
+and failure to reassess, and points to the marked benefit from Sinemet
+CR.</p>
+<p>The clinician's response is important because it changes the level of
+analysis.</p>
+<p>The question is now:</p>
+<blockquote>
+<p><strong>Was my previous practice reasonable and open to
+correction?</strong></p>
+</blockquote>
+<p>The response points to:</p>
+<ul>
+<li>alternative investigations;</li>
+<li>Fabry testing;</li>
+<li>repeated DaTscan;</li>
+<li>medication evolution;</li>
+<li>the fact that Sinemet had been introduced since 2021;</li>
+<li>the use of pregabalin to limit dopaminergic escalation;</li>
+<li>acknowledgement in 2017 that levodopa might later be needed;</li>
+<li>and the recent profound relief from Sinemet CR.</li>
+</ul>
+<p>These facts demonstrate that care changed.</p>
+<p>But there is a category problem if those local changes are used as
+the answer to a different question:</p>
+<blockquote>
+<p><strong>Was the founding feet–movement relationship itself ever
+reconstructed?</strong></p>
+</blockquote>
+<p>“I changed many things” is not logically equivalent to “I revisited
+the specific causal partition under challenge.”</p>
+<p>The complaint response can therefore function as <strong>second-order
+validation</strong>: the adaptability of later management is used to
+defend the epistemic openness of the originating model.</p>
+<p>That is precisely where local plasticity can be mistaken for global
+corrigibility.</p>
+<p>The response need not be dishonest to perform this function.</p>
+<p>It becomes explicitly <strong>advocacy-capable</strong> because it is
+now organising the longitudinal record in defence of the reasonableness
+of the earlier process.</p>
+<hr/>
+<h2 id="14-governance-is-the-next-recursive-layer">14. Governance is the
+next recursive layer</h2>
+<p>The governance process should not be read as wholly independent of
+the clinical record it reviews.</p>
+<p>Initially, QPS classifies the complaint as matters solely of clinical
+judgment and routes it to the original neurologist. After
+dissatisfaction, it is escalated through the Incident Management
+Framework to a Preliminary Assessment Report and Serious Incident
+Management Team.</p>
+<p>The September 2025 SIMT concludes that there was <strong>“no deficit
+in the care provided.”</strong></p>
+<p>The retained source does not show the full evidence pack or a
+source-by-source reconstruction of the original feet–movement
+relationship.</p>
+<p>The epistemic issue is therefore not simply that governance disagreed
+with the patient.</p>
+<p>It is the dependency structure:</p>
+<p><strong>2017 decision</strong></p>
+<p>→ <strong>2017 explanatory record</strong></p>
+<p>→ <strong>later care interpreted through inherited
+architecture</strong></p>
+<p>→ <strong>later notes generated inside that architecture</strong></p>
+<p>→ <strong>original clinician uses later notes to demonstrate
+continuing reassessment</strong></p>
+<p>→ <strong>governance reviews accumulated record and
+response</strong></p>
+<p>→ <strong>governance validates the care</strong></p>
+<p>→ <strong>validation becomes additional institutional support for the
+original decision.</strong></p>
+<p>This is <strong>recursive validation</strong>.</p>
+<p>Each layer appears more authoritative than the one before it while
+potentially remaining epistemically dependent upon the founding
+allocation.</p>
+<p>That does not make the governance outcome wrong by definition. It
+means that governance can only count as a genuine corrective mechanism
+if it is capable of reconstructing the provenance and testing the
+founding frame rather than merely reviewing the coherence of the record
+produced under it.</p>
+<p>The decisive governance question is:</p>
+<blockquote>
+<p><strong>Did the review independently test the disputed relationship
+and the information state at the moment of closure, or did it
+principally assess whether the accumulated record contained a plausible
+account under which the care remained defensible?</strong></p>
+</blockquote>
+<hr/>
+<h2 id="15-data-governance-and-historical-stabilisation">15. Data
+governance and historical stabilisation</h2>
+<p>The 2025 Article 16 rectification process introduces another
+layer.</p>
+<p>The clinical-data refusal says, in substance, that the
+diagnosis/opinion accurately reflects the professional opinion held at
+the time and that retaining the record in its current form serves
+continuity of care.</p>
+<p>That principle can be entirely legitimate. Historical records should
+not simply be rewritten because later evidence or disagreement
+arises.</p>
+<p>But the function of the record changes.</p>
+<p>Originally the question is:</p>
+<blockquote>
+<p><strong>Is this clinical account true enough and sufficiently tested
+to guide care?</strong></p>
+</blockquote>
+<p>Later it becomes:</p>
+<blockquote>
+<p><strong>Was this account a reasonable professional
+opinion?</strong></p>
+</blockquote>
+<p>Later still:</p>
+<blockquote>
+<p><strong>Does this record accurately preserve that this was the
+opinion held at the time?</strong></p>
+</blockquote>
+<p>Those are different truth conditions.</p>
+<p>A proposition can be medically wrong yet still accurately record a
+historical opinion.</p>
+<p>So the record can move through three statuses:</p>
+<p><strong>clinical hypothesis → travelling specialist account →
+protected historical record.</strong></p>
+<p>That process can be appropriate as data governance and still have an
+epistemic consequence: the original frame becomes progressively harder
+to interrogate because the institutional question has shifted from
+<strong>whether it was true enough</strong> to <strong>whether it
+faithfully records that it was once believed</strong>.</p>
+<hr/>
+<h2 id="16-januaryfebruary-2026-the-endpoint-of-the-architecture">16.
+January–February 2026: the endpoint of the architecture</h2>
+<p>The January 2026 QPS response is particularly important because it
+makes the distinction explicit.</p>
+<p>QPS states that the complaint assessment and SIMT process were
+appropriate based on the contemporaneous data, and that a subsequent
+dystonia diagnosis in December 2025 does not undermine those processes
+or outcomes. It further states that the updated diagnosis does not
+necessitate reopening governance reviews, altering prior determinations,
+or retrospectively amending historical medical records, and that QPS
+identifies no current governance risk arising from continued reliance on
+the completed processes.</p>
+<p>This is not merely persistence of a clinical opinion.</p>
+<p>It is an institutional rule about the <strong>epistemic status of the
+historical decision</strong>:</p>
+<blockquote>
+<p><strong>the present may change without requiring the past
+determination to become newly contestable.</strong></p>
+</blockquote>
+<p>In February 2026 an external consultant then records that genetic
+testing shows two pathogenic Parkin variants and concludes that the
+patient's Parkinsonism and dystonia are due to compound-heterozygous
+PRKN mutations.</p>
+<p>This is an external biological clarification. It does not prove every
+foot symptom was dystonic, that neuropathy never existed, or that 2017
+clinicians should have known the genotype.</p>
+<p>Its legitimate retrospective force is narrower:</p>
+<blockquote>
+<p><strong>the dystonic branch that was already clinically visible in
+2017 later proved biologically central to the movement
+disorder.</strong></p>
+</blockquote>
+<p>Yet the correction occurs externally. The retained Galway record
+through February 2026 does not show a corresponding internal
+reconstruction of the founding feet–movement relationship after that
+clarification.</p>
+<p>So the final state is striking:</p>
+<ul>
+<li>the clinical description can change;</li>
+<li>the genetic explanation can change;</li>
+<li>treatment can change;</li>
+<li>movement phenomenology can change;</li>
+<li>the patient's present diagnosis can change;</li>
+<li>but the epistemic status of the original institutional decision is
+expressly protected from those changes.</li>
+</ul>
+<p>That is why “local adaptability under global incorrigibility” is not
+rhetorical exaggeration at the level of the founding model. It describes
+the architecture visible by the end of the chronology.</p>
+<hr/>
+<h2 id="17-the-record-as-evidential-instrument-versus-advocacy-instrument">17.
+The record as evidential instrument versus advocacy instrument</h2>
+<p>A medical record performs more than one function. It supports care,
+communication, audit, continuity, governance and, inevitably, later
+legal evaluation.</p>
+<p>The problem is not that a good record makes good care easier to
+defend. It should.</p>
+<p>The distinction is:</p>
+<blockquote>
+<p><strong>defensible because the care was appropriately
+investigated</strong></p>
+</blockquote>
+<p>versus</p>
+<blockquote>
+<p><strong>defensible because the documentation supplies a sufficiently
+coherent explanation despite unresolved investigation.</strong></p>
+</blockquote>
+<p>If retrospective or post-notice explanatory skill can erase the
+difference between:</p>
+<ul>
+<li>“we considered this and tested it”;</li>
+<li>“we consciously decided testing was unnecessary and recorded
+why”;</li>
+<li>“we overlooked it”;</li>
+<li>“the patient accepted the distinction”;</li>
+<li>and “the patient expressly disputed the distinction,”</li>
+</ul>
+<p>then the record loses part of its value as an evidential
+instrument.</p>
+<p>It becomes increasingly capable of functioning as an <strong>advocacy
+instrument</strong>.</p>
+<p>That does not require falsification.</p>
+<p>Distortion can occur through selection, arrangement, omission and
+unequal preservation while every surviving sentence remains literally
+defensible.</p>
+<p>The danger is particularly acute where the same clinician or service
+is simultaneously:</p>
+<p><strong>decision-maker + recorder + principal witness + later
+defender of the decision.</strong></p>
+<p>That combination is unavoidable to some degree in medicine. It is why
+contemporaneous recording, independent observations, audit trails,
+preservation of contrary information and governance independence
+matter.</p>
+<p>They prevent explanatory authority from becoming equivalent to the
+underlying event.</p>
+<hr/>
+<h2 id="18-expertise-can-increase-corrigibility-or-increase-rationalising-power">18.
+Expertise can increase corrigibility or increase rationalising
+power</h2>
+<p>Expertise should increase the ability to discriminate between
+competing explanations.</p>
+<p>But expertise also increases the number and sophistication of
+explanations available.</p>
+<p>Without a mechanism forcing those explanations to encounter
+disconfirming evidence, more expertise can paradoxically create a more
+resilient self-sealing model.</p>
+<p>The institution then risks selecting for the wrong capacity:</p>
+<blockquote>
+<p><strong>the ability to make difficult situations sound reasonable
+rather than the ability to discover whether they are
+reasonable.</strong></p>
+</blockquote>
+<p>That is why the discharge note's sophistication is not automatically
+reassuring and not automatically incriminating.</p>
+<p>Its evidential meaning depends on <strong>function</strong>.</p>
+<p>Was PRKN/PARK2, PARK6, PARK7, PARK9, neuropathy, structural disease
+and treatment reasoning being used to open discriminating questions?</p>
+<p>Or, after the disposition was challenged, did the same expertise
+provide enough plausible propositions that no contrary fact needed to
+change the disposition?</p>
+<p>The central question is not whether the reasoning was
+intelligent.</p>
+<p>It is whether intelligence remained <strong>answerable to evidence
+capable of defeating it</strong>.</p>
+<hr/>
+<h2 id="19-the-local-academic-capability-evidence-relevant-but-bounded">19.
+The local academic capability evidence: relevant, but bounded</h2>
+<p>The professional environment had conceptual tools directly relevant
+to the phenomenon.</p>
+<p>Timothy Counihan was a co-author of the 2013 JAMA Neurology paper
+<em>Parkin Disease: A Clinicopathologic Entity?</em>, which includes
+Parkin cases with prominent foot dystonia.</p>
+<p>In August 2017, authors from University Hospital Galway / NUI Galway
+published <em>Clinical Reasoning: A demure teenager and her dystonic
+foot</em>, involving apparent footdrop caused by dystonic plantar
+flexion, normal power/sensation, later compound-heterozygous Parkin
+mutations and procyclidine treatment.</p>
+<p>This evidence shows that the reasoning move:</p>
+<p><strong>apparent footdrop → examine power/sensation → recognise
+dystonia → integrate with recessive Parkinsonism</strong></p>
+<p>was not alien to the local academic environment.</p>
+<p>But it must not be overused.</p>
+<p>The August paper was published after the July admission. The record
+does not establish that its authors examined this patient, that the
+treating clinician saw the manuscript before publication, or that the
+local capability was deployed at this bedside.</p>
+<p>Its fair use is therefore:</p>
+<blockquote>
+<p><strong>the conceptual tools existed in the immediate professional
+environment; the retained record does not establish their specific
+deployment to this patient's feet–dystonia relationship.</strong></p>
+</blockquote>
+<hr/>
+<h2 id="20-what-the-later-biology-can-and-cannot-prove">20. What the
+later biology can and cannot prove</h2>
+<p>The later PRKN evidence is a retrospective <strong>stress
+test</strong>, not a time machine.</p>
+<p>It can support:</p>
+<ul>
+<li>that the dystonic component was biologically central to the movement
+disorder;</li>
+<li>that lower-limb dystonia is compatible with PRKN disease;</li>
+<li>and that the neurological branch observed in 2017 was not an
+incidental curiosity.</li>
+</ul>
+<p>It cannot prove:</p>
+<ul>
+<li>every corn or callus was caused by dystonia;</li>
+<li>every episode of foot pain was dystonic;</li>
+<li>no peripheral neuropathy ever existed;</li>
+<li>a mixed mechanism was impossible;</li>
+<li>or clinicians in July 2017 should have known the genotype.</li>
+</ul>
+<p>The correct retrospective question is:</p>
+<blockquote>
+<p><strong>Why did the observed neurological branch that later proved
+biologically central receive less relational development in 2017 than a
+peripheral branch that remained conditional?</strong></p>
+</blockquote>
+<p>That is a question about explanatory allocation, not hindsight
+diagnosis.</p>
+<hr/>
+<h2 id="21-strongest-innocent-explanation-and-strongest-concerning-explanation">21.
+Strongest innocent explanation and strongest concerning explanation</h2>
+<p>The integrated model must preserve both.</p>
+<h3 id="strongest-innocent-explanation">Strongest innocent
+explanation</h3>
+<p>This was an unusually difficult very-young-onset Parkinsonian
+presentation. The treating neurologist genuinely believed the movement
+disorder and the painful structural/cutaneous foot complaints might be
+partly independent. The patient's own history supported distinction.
+Burning reasonably raised neuropathy. Previous alcohol exposure
+reasonably entered the differential. Podiatry was already involved. The
+complex discharge note was the ordinary culmination of a long specialist
+admission. The pending DaTscan justified keeping the document open. No
+additional inpatient foot investigation was clinically required. The
+alleged Protest may not have occurred as later remembered, may not have
+reached the author, may have concerned a different proposition, or may
+have been regarded as adequately addressed by the substantive clinical
+account. Later treatment changes demonstrate genuine ongoing care rather
+than a closed mind. The later dystonia/PRKN clarification does not
+automatically invalidate the reasonableness of decisions made with 2017
+knowledge.</p>
+<p>That explanation is coherent and must remain genuinely available.</p>
+<h3 id="strongest-concerning-explanation">Strongest concerning
+explanation</h3>
+<p>The service knew before closure that the patient regarded the
+bilateral foot disorder as an unresolved part of the neurological
+problem and specifically objected to discharge on that basis. Rather
+than using the remaining opportunity to examine, preserve or
+specifically route the relationship, the still-open specialist synthesis
+developed an architecture that de-coupled the foot territory from the
+movement disorder: historical pain reduction became “out of the
+picture”; heterogeneous foot and sensory findings were grouped as “leg
+symptoms”; burning supported neuropathy; previous alcohol supplied an
+etiology; improvement reduced urgency; selected patient statements
+supported separation; and Podiatry supplied a destination. The patient's
+contrary Protest did not travel. Later contradictory observations were
+repeatedly absorbed through local reclassification and treatment
+adaptation without reconstructing the founding partition. When the
+patient later challenged the process, the original clinician used that
+longitudinal adaptability as evidence against anchoring; governance then
+relied on the accumulated record and response to validate the care; data
+governance protected the historical opinion; and QPS ultimately stated
+that a later dystonia diagnosis did not require reopening the earlier
+determination.</p>
+<p>On that hypothesis, the expertise is genuine but partly
+<strong>functionally adversarial</strong>: it helps preserve the
+decision against the disconfirming force of the patient and later
+reality.</p>
+<p>That is the strongest version of the “prior negligence setup”
+hypothesis.</p>
+<p>It is still a hypothesis.</p>
+<hr/>
+<h2 id="22-what-would-discriminate-between-them">22. What would
+discriminate between them</h2>
+<p>The most important evidence is provenance.</p>
+<p>The highest-value questions are:</p>
+<h3 id="the-protest">The Protest</h3>
+<ul>
+<li>Did it occur?</li>
+<li>What exactly was said?</li>
+<li>Who heard it?</li>
+<li>Did the responsible consultant or author of the synthesis know about
+it before finalisation?</li>
+<li>Was it documented anywhere contemporaneously?</li>
+</ul>
+<h3 id="drafting-chronology">Drafting chronology</h3>
+<ul>
+<li>When was the discharge synthesis first created?</li>
+<li>When did the phrases “out of the picture,” “burning,” “completely
+separate,” “secondary peripheral neuropathy,” alcohol-related, “not
+clear as this has improved,” and “markedly divorced” first appear?</li>
+<li>Which passages existed before the alleged Protest?</li>
+<li>Which were added or strengthened afterwards?</li>
+<li>What changed after physical discharge?</li>
+<li>What changed after the DaTscan?</li>
+</ul>
+<h3 id="source-and-audit-evidence">Source and audit evidence</h3>
+<ul>
+<li>dictation audio;</li>
+<li>transcription records;</li>
+<li>native drafts;</li>
+<li>save/edit/sign/finalise timestamps;</li>
+<li>audit logs;</li>
+<li>copy-forward history;</li>
+<li>amendment status;</li>
+<li>source note for patient-attributed propositions;</li>
+<li>ward-round, nursing, physiotherapy and occupational-therapy
+notes;</li>
+<li>student or teaching records;</li>
+<li>contemporaneous messages or family communications.</li>
+</ul>
+<h3 id="clinical-action-after-notice">Clinical action after notice</h3>
+<ul>
+<li>repeat foot/lower-limb examination;</li>
+<li>focused sensory/reflex/strength assessment;</li>
+<li>movement-phenomenology review;</li>
+<li>colleague or movement-disorders discussion specifically about the
+relationship;</li>
+<li>EMG/NCS consideration where clinically relevant;</li>
+<li>defined question to Podiatry;</li>
+<li>mixed-mechanism formulation;</li>
+<li>explicit reason why no further inpatient investigation was
+necessary;</li>
+<li>specific return condition.</li>
+</ul>
+<h3 id="defensive-purpose-evidence">Defensive-purpose evidence</h3>
+<p>The inference becomes materially stronger if contemporaneous
+communications show that complaint exposure, risk, legal defensibility
+or concern about the patient's objection influenced the development of
+the clinical narrative before finalisation.</p>
+<p>Risk/governance/legal contact would not itself prove wrongdoing. The
+contents and timing would matter.</p>
+<h3 id="2017-expert-standard-of-care-evidence">2017 expert
+standard-of-care evidence</h3>
+<p>An appropriately instructed neurological expert must answer what a
+reasonably competent clinician in 2017 should have done once the
+particular lower-limb/foot findings and, if proved, the patient's
+objection were known.</p>
+<p>Without that step, unresolved diagnosis must not simply be converted
+into negligence.</p>
+<p>The core discriminator remains:</p>
+<blockquote>
+<p><strong>Was the explanation defensible because it followed
+proportionate inquiry, or did explanation itself substitute for inquiry
+that was reasonably indicated?</strong></p>
+</blockquote>
+<hr/>
+<h2 id="23-the-hypothesis-must-remain-falsifiable">23. The hypothesis
+must remain falsifiable</h2>
+<p>The analysis is demanding of the institution because it is demanding
+about epistemic correction.</p>
+<p>It must therefore impose the same demand on itself.</p>
+<p>Evidence that would materially weaken the stronger hypothesis
+includes:</p>
+<ul>
+<li>proof that the peripheral/separation formulation was substantially
+complete before the Protest;</li>
+<li>proof that the Protest never reached the relevant
+decision-maker;</li>
+<li>contemporaneous focused examination or consultation demonstrating
+that the relationship was considered and reasonably left unresolved or
+separated;</li>
+<li>a source predating the Protest for the patient-attributed separation
+language;</li>
+<li>evidence that post-discharge changes were limited to routine
+completion and DaTscan incorporation;</li>
+<li>expert evidence that no additional relational investigation or
+specialist input was reasonably indicated;</li>
+<li>or evidence that the patient statements preserved and the later
+Protest addressed genuinely different propositions rather than
+contradictory positions on the same relationship.</li>
+</ul>
+<p>Evidence that would materially strengthen it includes:</p>
+<ul>
+<li>corroboration of the Protest before finalisation;</li>
+<li>post-Protest creation or strengthening of
+separation/neuropathy/alcohol language without new foot-related clinical
+evidence;</li>
+<li>unsupported patient-attributed propositions appearing only after
+notice;</li>
+<li>selective omission of contrary contemporaneous information;</li>
+<li>no targeted clinical act despite remaining opportunity;</li>
+<li>or contemporaneous communications showing that defensibility rather
+than additional inquiry had become the relevant concern.</li>
+</ul>
+<p>The analysis must be capable of losing.</p>
+<p>Otherwise it would reproduce the very epistemic defect it
+identifies.</p>
+<hr/>
+<h2 id="24-the-whole-architecture-in-one-sequence">24. The whole
+architecture in one sequence</h2>
+<p>The case can now be represented as one continuous epistemic process
+rather than a series of unrelated problems.</p>
+<h3 id="founding-information-state">Founding information state</h3>
+<p><strong>integrated foot pain + structural foot pathology + abnormal
+gait + severe Parkinsonism + dystonic-looking lower-limb movement +
+genuine patient distinctions</strong></p>
+<p>↓</p>
+<h3 id="founding-synthesis">Founding synthesis</h3>
+<p><strong>expansive Parkinsonian/genetic branch + separate/peripheral
+foot branch</strong></p>
+<p>↓</p>
+<h3 id="possible-pre-closure-challenge">Possible pre-closure
+challenge</h3>
+<p><strong>patient identifies unresolved foot problem before
+closure</strong></p>
+<p>↓</p>
+<h3 id="critical-fork">Critical fork</h3>
+<p>Either:</p>
+<p><strong>challenge → proportionate inquiry / preservation of
+uncertainty → decision</strong></p>
+<p>or:</p>
+<p><strong>challenge → explanatory strengthening of existing disposition
+→ closure</strong></p>
+<p>↓</p>
+<h3 id="travelling-record">Travelling record</h3>
+<p><strong>the partition becomes specialist knowledge inherited by later
+care</strong></p>
+<p>↓</p>
+<h3 id="longitudinal-anomalies">Longitudinal anomalies</h3>
+<p><strong>treatment-state foot changes → neurological pseudo-footdrop →
+OFF dystonia → OFF pain/shuffling → profound dopaminergic pain
+relief</strong></p>
+<p>↓</p>
+<h3 id="model-behaviour">Model behaviour</h3>
+<p><strong>local facts change; founding partition survives through
+assimilation</strong></p>
+<p>↓</p>
+<h3 id="patients-epistemic-position">Patient's epistemic position</h3>
+<p><strong>confirmatory statements retained; contradictory evidence
+increasingly interpreted through the inherited frame</strong></p>
+<p>↓</p>
+<h3 id="complaint-stage">Complaint stage</h3>
+<p><strong>later adaptability is used to defend the
+openness/reasonableness of the original process</strong></p>
+<p>↓</p>
+<h3 id="governance-stage">Governance stage</h3>
+<p><strong>accumulated record validates the care that generated the
+record</strong></p>
+<p>↓</p>
+<h3 id="historical-stabilisation">Historical stabilisation</h3>
+<p><strong>the clinical opinion becomes a protected historical record of
+what was believed</strong></p>
+<p>↓</p>
+<h3 id="external-correction">External correction</h3>
+<p><strong>dystonia / PRKN clarification changes present clinical
+knowledge</strong></p>
+<p>↓</p>
+<h3 id="institutional-endpoint">Institutional endpoint</h3>
+<p><strong>later diagnosis does not require reopening prior governance
+or historical determinations.</strong></p>
+<p>This is why the discharge synthesis, the patient, the later clinic
+notes, the complaint response and the governance response are
+<strong>all one thing</strong>.</p>
+<p>They are successive layers in the life of an explanatory
+decision.</p>
+<p>The decisive question at every layer is the same:</p>
+<blockquote>
+<p><strong>What is allowed to change what?</strong></p>
+</blockquote>
+<hr/>
+<h2 id="25-integrated-controlling-formulation">25. Integrated
+controlling formulation</h2>
+<p>The strongest current formulation is:</p>
+<blockquote>
+<p><strong>The 2017 problem is not adequately described as a failure to
+diagnose dystonia, a failure to recognise Parkinsonism, or a simple
+failure to investigate foot pain. The contemporaneous record shows
+sophisticated recognition of very-young-onset Parkinsonism, direct
+observation of dystonic-looking lower-limb movement, genuine structural
+foot disease, and genuine evidence that the patient experienced some
+pain and tension as different phenomena. The central question is how
+those truths were organised. The discharge synthesis appears to give the
+Parkinsonian syndrome an expansive neurological/genetic future while
+giving the foot territory a separate/peripheral future through a
+sequence involving historical improvement, “burning,” possible
+neuropathy, possible alcohol association, the patient's own supposed
+separation, and Podiatry. If the Protest is proved, the significance
+rises sharply: the patient identified the incompleteness before closure,
+while correction and documentary preservation remained possible. The
+question then becomes whether expertise was used principally to expose
+the existing disposition to disconfirming evidence or to make the
+existing disposition capable of surviving the challenge.</strong></p>
+</blockquote>
+<p>And longitudinally:</p>
+<blockquote>
+<p><strong>The later record does not show a system incapable of change.
+It shows a system highly capable of changing local facts, treatments and
+labels while the epistemic status of the founding decision remains
+unusually durable. That durability and the changing epistemic status of
+the patient are the same mechanism: the decision can remain fixed
+because the patient's symptoms, chronology, distinctions, treatment
+responses and later diagnoses remain available for reinterpretation.
+Later clinic notes become stress tests of the founding architecture; the
+complaint response becomes second-order defence of its reasonableness;
+governance becomes recursive validation of the accumulated record; data
+governance converts the opinion into protected history; and the January
+2026 no-reopen position makes explicit that new clinical reality need
+not alter the institutional status of the old decision.</strong></p>
+</blockquote>
+<p>The deepest formulation is therefore:</p>
+<blockquote>
+<p><strong>The system could change almost everything except the
+epistemic status of the original decision because it could reinterpret
+almost everything about the patient instead.</strong></p>
+</blockquote>
+<p>And the governing prohibition is:</p>
+<blockquote>
+<p><strong>A system may defend a decision by showing the evidence,
+reasoning and proportionate inquiry that justified it. It cannot make an
+inadequately investigated decision equivalent to an adequately
+investigated one merely by increasing the sophistication of the
+explanation that protects it.</strong></p>
+</blockquote>
+<hr/>
+<h2 id="26-questions-that-now-matter-most">26. Questions that now matter
+most</h2>
+<p>The next pass should not broaden the theory further. It should
+discriminate it.</p>
+<ol type="1">
+<li><strong>What exactly was the information state immediately before
+the alleged Protest?</strong></li>
+<li><strong>What exactly was the information state immediately after
+it?</strong></li>
+<li><strong>Which consequential phrases in the discharge synthesis
+pre-date the Protest, and which post-date it?</strong></li>
+<li><strong>What clinical acts, not merely explanatory sentences,
+occurred after notice?</strong></li>
+<li><strong>What would the treating team in 2017 have regarded as
+evidence against the separate/peripheral allocation?</strong></li>
+<li><strong>Was there an explicit exit condition for
+neuropathy/separation?</strong></li>
+<li><strong>Was the patient allowed to transmit disagreement into the
+authoritative record, or only history that could be assimilated into
+it?</strong></li>
+<li><strong>Did later neurological reclassification of the foot
+territory ever trigger review of the founding partition?</strong></li>
+<li><strong>Did the 2025 complaint investigation reconstruct the 2017
+information state independently, or evaluate the coherence of the
+accumulated record?</strong></li>
+<li><strong>What evidence did SIMT use to conclude “no deficit,” and did
+it specifically test the feet–movement relationship and the alleged
+pre-closure notice?</strong></li>
+<li><strong>Why was the later dystonia diagnosis considered capable of
+changing present clinical knowledge but incapable of reopening the
+historical governance conclusion?</strong></li>
+<li><strong>What would count, institutionally, as sufficient evidence
+that the original decision was not adequately justified?</strong></li>
+<li><strong>If no conceivable later fact can answer that question, has
+the decision become institutionally unfalsifiable?</strong></li>
+</ol>
+<p>The analytical task is now precise:</p>
+<blockquote>
+<p><strong>reconstruct the chronology by which a provisional clinical
+allocation may have become an increasingly protected epistemic fact, and
+determine whether that protection was earned by inquiry or produced by
+explanation.</strong></p>
+</blockquote>
+</main></div><script>(function(){
+  const doc=document.documentElement;
+  function updateProgress(){
+    const max=doc.scrollHeight-innerHeight;
+    const pct=max>0?Math.min(100,Math.max(0,scrollY/max*100)):0;
+    doc.style.setProperty('--reading-progress',pct.toFixed(2)+'%');
+  }
+  addEventListener('scroll',updateProgress,{passive:true});
+  addEventListener('resize',updateProgress);
+  updateProgress();
+})();</script></body>
+</html>
