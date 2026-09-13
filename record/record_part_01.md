@@ -1,10 +1,18 @@
-# Clinical Record — Public Reading Copy
+# Clinical Record — Governed Public Reading Copy
+
+## Governing status
+
+This page is subordinate to the **Governing Analytical Framework** (`revisiting_medical_inquiry-1.html`). Its purpose is to expose the clinical and governance sequence in a form that allows the framework's questions to be tested against the record: what was observed, what was inferred, what was tested, what remained unresolved, what later evidence did to the model, and whether the model changed.
+
+This is still an evidential reading copy, not an argument that overrides its sources. The underlying original source and scoped canonical evidential record control factual accuracy, provenance and source status. If an analytical proposition conflicts with a source, the source wins.
 
 ## Evidential discipline
 
-This page is a readable public presentation of the principal clinical and governance material used by the Spot On repository. It is organised chronologically and preserves the distinction between contemporaneous clinical observation, patient report, clinician interpretation, later institutional response and retrospective evidence. Direct patient identifiers are omitted. The underlying original source controls wherever the canonical evidential record says so.
+This page preserves the distinction between contemporaneous clinical observation, patient report, clinician interpretation, later institutional response and retrospective evidence. Direct patient identifiers are omitted.
 
-Later evidence is not projected backwards as knowledge available in 2017. It is used only where identified as a later test of an earlier clinical model.
+Later evidence is not projected backwards as knowledge available in 2017. It is used only where identified as a later stress test of an earlier clinical model.
+
+The Protest is an assumed premise for the repository's interpretive analysis unless and until independently corroborated; its later reporting is not itself contemporaneous proof of the event.
 
 ---
 
@@ -74,11 +82,11 @@ The LTI submission is not evidence that the Parkinson's diagnosis was improper. 
 
 ## 10–11 July 2017 — the Protest
 
-For the legal and ethics analyses in this repository, the Protest is treated as an established premise: near the end of the admission the patient told the service, in substance, that the bilateral foot problem which had brought him into the medical system had still not been accounted for and that discharge therefore felt incomplete.
+For the repository's governing analysis, the Protest is an assumed premise requiring separate proof: near the end of the admission the patient says he told the service, in substance, that the bilateral foot problem which had brought him into the medical system had still not been accounted for and that discharge therefore felt incomplete.
 
-The Protest did not require the patient to diagnose dystonia. Its content was simpler: the originating problem remained unanswered.
+The Protest did not require the patient to diagnose dystonia. Its alleged content was simpler: the originating problem remained unanswered.
 
-The Protest created a decision fork. The service could reopen the relationship, re-examine, seek movement-disorders input, preserve the unresolved relationship explicitly, arrange a defined neurological return, document disagreement, or proceed while explaining why. The final travelling record is the surviving evidence of what was made portable after that fork.
+If established, it created a decision fork. The service could reopen the relationship, re-examine, seek movement-disorders input, preserve the unresolved relationship explicitly, arrange a defined neurological return, document disagreement, or proceed while explaining why. The final travelling record is the surviving evidence of what was made portable after that fork.
 
 ## Physical discharge and documentary completion
 
@@ -132,11 +140,13 @@ This does not mean a drug created or removed a corn. It is evidence that the cli
 
 Podiatry documented real mechanical disease: clawed toes, callus, recurrent focal pressure pathology, offloading, toe props, insoles and tight gastrocnemius/soleus structures.
 
-A later re-referral described the foot problems as relating to “increased tone and abnormal gait relating to Parkinson's disease” and included clawing feet and pain. The Podiatry risk assessment recorded “No neuropathy.”
+A later re-referral described foot problems as relating to increased tone and abnormal gait associated with Parkinson's disease and included clawing feet and pain.
+
+The retained referral material also contains a visible low-risk option labelled “No neuropathy,” but in the scoped canonical record that box is described as **not ticked**. A later source in the wider corpus may support a different proposition, but it should be located before “Podiatry recorded no neuropathy” is relied upon as a primary evidential plank.
 
 ### Source-status note
 
-These observations do not prove that every painful lesion was dystonic. They do show that the mechanical and neurological descriptions were capable of being complementary rather than mutually exclusive.
+These observations do not prove that every painful lesion was dystonic. They do show that mechanical and neurological descriptions were capable of being complementary rather than mutually exclusive.
 
 ---
 
@@ -222,7 +232,7 @@ That response is important evidence of the mature explanatory model. It rebuts a
 
 ## Governance review
 
-The later institutional process concluded that care was appropriate and identified no deficit. The repository's governance question is evidential independence: to what extent did the review reconstruct the founding decision from primary evidence, and to what extent did it rely on records generated inside the information architecture under challenge?
+The later institutional process concluded that care was appropriate and identified no deficit. Under the governing framework, the key question is evidential independence: to what extent did the review reconstruct the founding decision from primary evidence, and to what extent did it rely on records generated inside the information architecture under challenge?
 
 ---
 
@@ -266,7 +276,7 @@ The pre-specialist problem was integrated rather than already partitioned. Sever
 
 ## Assumed for the repository's Protest analysis
 
-The Protest occurred; the responsible service received direct notice; the omission from the travelling account is real; and the Protest created the decision fork before documentary completion.
+The Protest occurred; the responsible service received direct notice; the omission from the travelling account is real; and the Protest created the decision fork before documentary completion. These remain premises requiring separate proof.
 
 ## Not established merely by this record
 
@@ -280,6 +290,6 @@ The legal and ethical question can be severe without collapsing those distinctio
 
 The core documentary sequence is compact:
 
-**Integrated GP problem → severe Parkinsonism recognised → dystonic-looking lower limb observed → Protest/notice → final synthesis gives painful feet a peripheral/structural future → Protest does not travel → later care repeatedly generates neurological-foot evidence → neuropathy remains conditional → dopaminergic response and PRKN biology place increasing pressure on the founding separation.**
+**Integrated GP problem → severe Parkinsonism recognised → dystonic-looking lower limb observed → alleged Protest/notice → final synthesis gives painful feet a peripheral/structural future → Protest does not travel → later care repeatedly generates neurological-foot evidence → neuropathy remains conditional → dopaminergic response and PRKN biology place increasing pressure on the founding separation.**
 
-That sequence is why the repository treats the case not simply as a dispute over diagnosis, but as a dispute over how specialist documentation changed the future information state of an unresolved clinical relationship.
+Under the governing framework, this sequence is read not simply as a dispute over diagnosis, but as a test of whether a founding explanatory model remained answerable to materially contrary evidence over time.
