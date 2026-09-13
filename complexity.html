@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f4f0e8">
+  <meta name="description" content="The Construction of Complexity — a source-controlled reading of the 2017 Neurology synthesis.">
+  <title>The Construction of Complexity — JR Reading Room</title>
+  <style>
+    :root{
+      --bg:#f4f0e8;
+      --paper:#fffdf8;
+      --ink:#1b2326;
+      --muted:#697275;
+      --line:#d8d0c4;
+      --accent:#7a4937;
+      --accent-soft:#f2e7df;
+      --teal:#365b60;
+      --shadow:0 24px 70px rgba(31,37,39,.10);
+      --measure:760px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;background:var(--bg)}
+    body{
+      margin:0;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 86% 4%,rgba(122,73,55,.08),transparent 30rem),
+        radial-gradient(circle at 8% 40%,rgba(54,91,96,.06),transparent 28rem),
+        var(--bg);
+      font-family:Georgia,"Times New Roman",serif;
+      text-rendering:optimizeLegibility;
+    }
+    .progress{position:fixed;z-index:20;top:0;left:0;height:3px;width:0;background:var(--accent)}
+    .topbar{
+      position:sticky;top:0;z-index:10;
+      border-bottom:1px solid rgba(216,208,196,.88);
+      background:rgba(244,240,232,.92);
+      backdrop-filter:blur(14px);
+    }
+    .topbar-inner{max-width:1120px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .back,.source{font-family:Arial,Helvetica,sans-serif;font-size:12px;font-weight:800;letter-spacing:.02em;text-decoration:none;color:var(--ink)}
+    .back:hover,.source:hover{text-decoration:underline;text-underline-offset:3px}
+    .source{color:var(--muted);font-weight:700}
+    .hero{max-width:1120px;margin:0 auto;padding:clamp(58px,9vw,112px) 24px 48px}
+    .eyebrow{font-family:Arial,Helvetica,sans-serif;font-size:11px;letter-spacing:.17em;text-transform:uppercase;font-weight:800;color:var(--accent);margin-bottom:18px}
+    .hero h1{font-size:clamp(3rem,7vw,6.2rem);line-height:.94;letter-spacing:-.055em;font-weight:600;margin:0;max-width:1000px}
+    .dek{max-width:760px;margin:28px 0 0;font-size:clamp(1.15rem,2vw,1.42rem);line-height:1.55;color:#455053}
+    .meta{margin-top:28px;display:flex;gap:10px;flex-wrap:wrap;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+    .meta span{border:1px solid var(--line);border-radius:999px;padding:8px 10px;background:rgba(255,253,248,.62)}
+    .layout{max-width:1120px;margin:0 auto;padding:0 24px 88px;display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:54px;align-items:start}
+    .paper{background:rgba(255,253,248,.94);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:clamp(30px,6vw,68px)}
+    article{max-width:var(--measure);margin:0 auto}
+    article>h1:first-child{display:none}
+    article h2{font-size:clamp(2rem,4vw,3rem);line-height:1.06;letter-spacing:-.035em;font-weight:600;margin:2.6em 0 .75em;padding-top:.2em}
+    article h2:first-of-type{margin-top:.2em}
+    article h3{font-size:1.55rem;line-height:1.2;margin:2em 0 .7em}
+    article p{font-size:1.12rem;line-height:1.76;margin:0 0 1.25em}
+    article strong{font-weight:700}
+    article em{font-style:italic}
+    article blockquote{margin:1.9em 0;padding:1px 0 1px 24px;border-left:4px solid var(--accent);color:#313b3e}
+    article blockquote p{font-size:1.22rem;line-height:1.6;margin:.75em 0}
+    article ul,article ol{font-size:1.08rem;line-height:1.68;padding-left:1.4em;margin:0 0 1.5em}
+    article li{margin:.36em 0}
+    article hr{border:0;border-top:1px solid var(--line);margin:3em 0}
+    article table{width:100%;border-collapse:collapse;margin:2em 0;font-family:Arial,Helvetica,sans-serif;font-size:.92rem;line-height:1.5}
+    article th,article td{border-bottom:1px solid var(--line);padding:10px 8px;text-align:left;vertical-align:top}
+    article th{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+    article code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em;background:#efe9df;padding:.12em .32em;border-radius:5px}
+    .toc{position:sticky;top:74px;border-left:1px solid var(--line);padding-left:20px}
+    .toc-label{font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:900;margin-bottom:14px}
+    .toc a{display:block;text-decoration:none;color:#586265;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.35;padding:6px 0}
+    .toc a:hover{color:var(--ink)}
+    .toc a.active{color:var(--accent);font-weight:800}
+    .loading{font-family:Arial,Helvetica,sans-serif;color:var(--muted);font-size:14px;text-align:center;padding:100px 0}
+    .error{border:1px solid #d7b7aa;background:#fbefea;border-radius:12px;padding:18px;font-family:Arial,Helvetica,sans-serif;line-height:1.5}
+    footer{max-width:1120px;margin:0 auto;padding:0 24px 52px;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:var(--muted)}
+    footer div{border-top:1px solid var(--line);padding-top:18px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+    @media(max-width:920px){.layout{grid-template-columns:1fr}.toc{display:none}.paper{border-radius:16px}}
+    @media(max-width:620px){.hero{padding-top:48px}.layout{padding-left:12px;padding-right:12px}.paper{padding:28px 20px}.source{display:none}article p{font-size:1.07rem}.topbar-inner{padding-left:16px;padding-right:16px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+    @media print{.topbar,.progress,.toc{display:none}.hero{padding:20px 0}.layout{display:block;padding:0}.paper{box-shadow:none;border:0;padding:0}body{background:white}.hero h1{font-size:36pt}article h2{break-after:avoid}}
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <nav class="topbar" aria-label="Reading room navigation">
+    <div class="topbar-inner">
+      <a class="back" href="./index.html">← JR Reading Room</a>
+      <a class="source" href="./complexity.md">View source Markdown</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">03 · Forensic reading</div>
+    <h1>The Construction of Complexity</h1>
+    <p class="dek">How an unresolved foot–dystonia relationship became a separate peripheral problem — and why documentary complexity must not be mistaken for complexity inherent in the patient.</p>
+    <div class="meta"><span>2017 founding record</span><span>Neuropathy construction</span><span>Dystonia displacement</span></div>
+  </header>
+
+  <main class="layout">
+    <section class="paper" aria-label="Essay">
+      <article id="article"><div class="loading">Preparing the reading edition…</div></article>
+    </section>
+    <aside class="toc" aria-label="On this page">
+      <div class="toc-label">On this page</div>
+      <div id="toc"></div>
+    </aside>
+  </main>
+
+  <footer><div><span>HTML reading edition generated from <strong>complexity.md</strong></span><span>TitanicParker / spot-on</span></div></footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+  <script>
+    const article = document.getElementById('article');
+    const toc = document.getElementById('toc');
+    const progress = document.getElementById('progress');
+
+    function slugify(text){
+      return text.toLowerCase().replace(/[“”‘’'"?.:,;()]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,80) || 'section';
+    }
+
+    function buildToc(){
+      const seen = new Map();
+      const headings = [...article.querySelectorAll('h2')];
+      headings.forEach(h => {
+        let base = slugify(h.textContent);
+        let count = seen.get(base) || 0;
+        seen.set(base,count+1);
+        h.id = count ? `${base}-${count+1}` : base;
+        const a = document.createElement('a');
+        a.href = `#${h.id}`;
+        a.textContent = h.textContent;
+        toc.appendChild(a);
+      });
+      if ('IntersectionObserver' in window) {
+        const links = [...toc.querySelectorAll('a')];
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if(entry.isIntersecting){
+              links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${entry.target.id}`));
+            }
+          });
+        },{rootMargin:'-18% 0px -68% 0px'});
+        headings.forEach(h => observer.observe(h));
+      }
+    }
+
+    fetch('./complexity.md', {cache:'no-store'})
+      .then(r => { if(!r.ok) throw new Error(`HTTP ${r.status}`); return r.text(); })
+      .then(md => {
+        if(!window.marked) throw new Error('Markdown renderer unavailable');
+        article.innerHTML = marked.parse(md, {gfm:true, breaks:false});
+        buildToc();
+      })
+      .catch(err => {
+        article.innerHTML = `<div class="error"><strong>The reading edition could not be rendered.</strong><br>${err.message}. You can still read the <a href="./complexity.md">source Markdown</a>.</div>`;
+      });
+
+    function updateProgress(){
+      const doc = document.documentElement;
+      const max = doc.scrollHeight - doc.clientHeight;
+      const pct = max > 0 ? (doc.scrollTop / max) * 100 : 0;
+      progress.style.width = `${pct}%`;
+    }
+    document.addEventListener('scroll', updateProgress, {passive:true});
+    window.addEventListener('resize', updateProgress);
+    updateProgress();
+  </script>
+</body>
+</html>
