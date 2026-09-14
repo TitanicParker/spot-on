@@ -10,18 +10,18 @@ The repository does **not** begin with the finished discharge synthesis and ask 
 
 ## Start here
 
-Open the **[Reading Room](./index.html)** for the navigable site.
+Open **[Read the Case](./index.html)**. The landing page is now a swipe-through orientation: ten short steps that progressively introduce Priorness, the integrated presenting problem, the Protest, the 2017 phase change, one history/documentary overlay, later stress tests, the levodopa asymmetry, corrigibility, governance and the routes into the deeper material.
 
-For the clearest understanding of the case, read in this order:
+For the clearest full reading, continue in this order:
 
 1. **[The Governing Analytical Framework](./governing_framework.html)** — the controlling reconstruction: Priorness, the Protest, premature documentary closure, one history / documentary overlay, boundary-crossing evidence, corrigibility and the levodopa asymmetry.
 2. **[The Clinical Record](./medical_record.html)** — a searchable chronological reading copy of the principal clinical and institutional sequence.
 3. **[The Construction of Complexity](./complexity.html)** — close reading of the July 2017 synthesis and how its categories were built.
 4. **[The Unresolved Relationship](./ethics_narrative.html)** — the human and professional meaning of an omitted correction signal within one continuous history.
 5. **[The Legal Shape of the Case](./legal_shape.html)** — a legal-facing map of duty, breach, causation, proof and the limits of the present evidence.
-6. **[100 Arguments](./argument_register.html)** — a card register of facts, premises, inferences, stress tests, questions and falsifiers. Use it as an index, not as a substitute for the framework or record.
+6. **[100 Arguments](./arguments.html)** — a curated swipe deck retaining all arguments while presenting each in three layers: **blue = proposition, yellow = development, red = evidential dependency / limit**. Use it as an index into the case, not as a substitute for the framework or record.
 
-The full source-controlled evidential corpus is preserved separately in **[`canonical_evidential_record.md`](./canonical_evidential_record.md)**. The governed chronological Markdown used by the reading copy is **[`record/clinical_record.md`](./record/clinical_record.md)**.
+The original full-register implementation remains at **[`argument_register.html`](./argument_register.html)** and supplies the underlying argument data. The full source-controlled evidential corpus is preserved separately in **[`canonical_evidential_record.md`](./canonical_evidential_record.md)**. The governed chronological Markdown used by the reading copy is **[`record/clinical_record.md`](./record/clinical_record.md)**.
 
 ## The case in one sequence
 
