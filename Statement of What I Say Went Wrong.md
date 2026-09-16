@@ -28,9 +28,11 @@ That information state was challenged remarkably quickly.
 
 After neurological treatment with procyclidine and rasagiline I improved dramatically. When procyclidine was later withdrawn for two weeks, the first thing I noticed changing rapidly was the outside-left-foot problem, accompanied by becoming more “shifty” and “unrelaxed.” The symptoms worsened off the neurological medication and improved after treatment was restored.
 
-That did not prove that a drug had removed a corn or callus. What it showed was something more important: the disputed foot territory was behaving in a way that was dependent, at least in part, on neurological medication state.
+The important point is not that procyclidine somehow treated a callus. It is that pain arising from the same persistent focal territory at the lateral left forefoot was reproducibly altered by neurological medication: it improved with treatment, worsened when treatment was withdrawn, and improved again when treatment was restored.
 
-There was also a persistent painful callus around the lateral left forefoot, including the fifth metatarsophalangeal region. A callus is a real structural lesion, but it is also produced by repeated pressure and loading. The possibility therefore existed that dystonia, rigidity, abnormal toe posture or another neurological motor abnormality was repeatedly loading the same part of the foot and producing or aggravating the lesion. On that model, Podiatry and Neurology were not competing explanations. Podiatry could treat the visible consequence while the neurological disorder continued to generate the abnormal biomechanics beneath it.
+That pattern is difficult to reconcile with the painful 5th-MTPJ region behaving as a wholly independent, static foot disorder. A structural lesion may still have been present, but the forces acting upon it — through dystonia, rigidity, abnormal posture, altered gait or another motor mechanism — may themselves have been neurologically determined.
+
+On that interpretation, the callus was potentially both a lesion and a clue: a visible marker of repeated abnormal loading at a site whose pain varied with neurological treatment state. The dechallenge/rechallenge did not establish the precise mechanism, but it provided a concrete clinical reason to investigate the relationship between the neurological disorder, foot biomechanics and the persistent focal lesion, rather than continuing to assume that the neurological and podiatric problems were separate.
 
 The record does not demonstrate that this relationship was investigated.
 
