@@ -74,6 +74,8 @@ The response continued to speak of “peripheral neuropathic pain symptomatologi
 
 Eventually the institutional response concluded that there had been no deficit in care.
 
+Since about 2004 I have had a persistent, recognisable point of pain on the outside of my left foot. I can still identify and feel that same place today, and I regard it as part and parcel of the same condition I have lived with throughout this history. No other pain anywhere in my body has persisted for so long in precisely the same location. By late 2017 the record had already shown that this foot territory was neurologically modifiable, because it changed with withdrawal and re-introduction of neurological treatment. Between 2023 and 2025 that same longstanding pain became so severe and psychologically consuming that I was using language about not being able to live with it, although I was describing intolerability rather than suicidal intent. In March 2025, a single overnight dose of Sinemet CR produced profound relief from a version of that same pain. The question for me is therefore not merely whether anyone could have known its precise mechanism in 2017; it is how a pain already shown to be neurologically modifiable, in a patient with young-onset Parkinsonism and suspected PRKN disease, could later become psychologically dangerous without triggering a documented safeguarding response. Given what the treating service already knew, that omission raises one of the most serious questions in the case.
+
 For me, however, the most serious part of this history is not the terminology used for Parkinsonism, the failure to perform PRKN testing earlier, or even the original neuropathy hypothesis.
 
 It is safeguarding.
